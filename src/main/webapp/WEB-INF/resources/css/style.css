@@ -1,0 +1,501 @@
+@CHARSET "ISO-8859-1";
+
+@import url(https://fonts.googleapis.com/css?family=Acme);
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+@import url(https://fonts.googleapis.com/css?family=Chewy);
+
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700);
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Open Sans', sans-serif;
+	color: #3c3c3c;
+	background-image: url('../image/bg-gif-1.gif');
+	overflow-x: hidden;
+}
+
+/*url('http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/weather.png');*/ 
+
+* {
+	outline: none;
+}
+
+
+.error {
+	font-family: 'Acme', sans-serif;
+	color: red;
+}
+
+.mem-list-class {
+	box-shadow: inset 1px 1px 10px 0px #ccc;
+	overflow-y: auto;
+	max-height: 450px;
+	min-height: 450px;
+	width: 30%;
+	float: left;
+}
+
+
+#header {
+	z-index: 100;
+}
+
+/*#send-butt:hover {
+	background-color: rgba(248, 205, 85, 1);
+	color: #3c3c3c;
+}
+*/
+::-webkit-scrollbar {
+	width: 3px;
+}
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+	border-radius: 1px;
+	opacity: 0;
+}
+
+::-webkit-scrollbar-thumb {
+	width: 10px;
+	background-color: rgba(248, 205, 83, 1);
+}
+
+::-moz-scrollbar {
+	width: 3px;
+}
+
+::-moz-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+	border-radius: 1px;
+	opacity: 0;
+}
+
+::-moz-scrollbar-thumb {
+	width: 10px;
+	background-color: rgba(248, 205, 83, 1);
+}
+
+div#container {
+	margin: 0px auto;
+	box-shadow: 0px 1px 1px 0px gray;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	width: 75%;
+	margin-top: 5%;
+	background-color: #fff;
+	max-height: 490px;
+	min-height: 490px;
+	border-radius: 5px;
+}
+
+div#chat-box-wrapper {
+	max-height: 450px;
+	min-height: 450px;
+	width: 70%;
+	float: right;
+}
+
+div#send-butt-wrapper {
+	float: left;
+	width: 15%;
+	min-width: 40px;
+	min-height: 80px;
+	max-height: 80px;
+	box-sizing: border-box;
+}
+
+div#send-butt {
+	margin: 0px auto;
+	width: 32px;
+	margin-top: 21px;
+	box-shadow: 0px 1px 1px 0px gray;
+	background-color: #3c3c3c;
+	color: rgba(248, 205, 83, 1);
+	cursor: pointer;
+	transition: background-color .8s;
+	border-top: 1px solid #ccc;
+	text-align: center;
+	height: 38px;
+	box-sizing: border-box;
+	padding-top: 11px;
+	border-radius: 50%;
+}
+
+div#send-butt:HOVER {
+	background-color: rgba(248, 205, 83, 1);
+	color: #3c3c3c;
+}
+
+textarea:focus {
+	outline: none;
+}
+
+.user-details {
+	padding: 5px;
+	display: block;
+	border-bottom: 1px solid #ccc;
+}
+
+#user-butt {
+	border: 1px solid gray;
+	padding: 10px;
+	margin-left: auto;
+	width:20px;
+	border-radius: 50%;
+	display: none;
+	cursor: pointer;
+}
+
+.user-name { //
+	font-family: 'Slabo 27px', serif; //
+	font-weight: bold;
+	font-family: 'Acme', sans-serif;
+	font-size: larger;
+	color: #000;
+}
+
+.user-status {
+	font-size: small;
+}
+
+#cc {
+	content: '';
+	display: none;
+}
+
+.msg {
+	padding: 10px;
+	margin: 5px 0px 5px 0px;
+	box-shadow: 0px 1px 1px 0px #ccc;
+	border-top: 1px solid rgba(204, 204, 204, .5);
+	border-left: 1px solid rgba(204, 204, 204, .5);
+	border-right: 1px solid rgba(204, 204, 204, .5);
+	border-radius: 30px;
+	display: inline-block;
+	color: black;
+	max-width: 70%;
+}
+
+.msg-by {
+	font-size: small;
+	font-weight: 600;
+	color: #E65100;
+}
+
+.msg-wrapper {
+	margin: 0px auto;
+	max-width: 96%;
+}
+
+.incoming {
+	text-align: left;
+}
+
+.outgoing {
+	text-align: right;
+}
+
+.in {
+	border-bottom-left-radius: 0px;
+	background-color: rgba(183, 190, 204, 0.3); //rgba(75, 116, 185, .3);
+}
+
+.out {
+	border-bottom-right-radius: 0px;
+	text-align: left;
+	background-color: rgba(216, 195, 137, 0.3); //rgba(248, 205, 83, .3);
+}
+
+.main-msg {
+	font-size: 13px;
+    font-weight: 600;
+}
+
+
+.day {
+	text-align: center;
+	border-radius: 4px;
+	padding: 3px;
+	font-size: small;
+}
+
+.msg-by-wrapper {
+	margin-bottom: 4px;
+}
+
+.time {
+	font-size: x-small;
+	color: #000; //
+	font-weight: bold;
+}
+
+.day1 {
+	background-color: rgba(248, 205, 83, 1);
+}
+
+#creator {
+	padding: 3px;
+	background-color: rgba(248, 205, 83, .3);
+	font-size: x-small;
+	color: #000;
+	border-radius: 5px;
+	float: right;
+	font-family: 'Open Sans', sans-serif;
+	border: 1px solid rgba(248, 205, 83, 1);
+}
+
+.tick {
+	text-shadow: 5px 0px 0px;
+    color: #70ad70;
+
+}
+
+#exit {
+	font-family: 'Open Sans', sans-serif;
+	font-size: small;
+	color: red;
+	font-weight: 600;
+	border: 1px solid rgba(231, 76, 60, 1);
+	padding: 3px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: font-size .5s;
+	float: right;
+	background-color: rgba(231, 76, 60, .2);
+}
+
+#exit:hover {
+	font-size: medium;
+}
+
+.link {
+	text-decoration: none;
+	padding: 1px 30px;
+}
+
+#chat-room-id {
+	font-size: 50px;
+}
+
+div#cont {
+	margin-top: 15%;
+	text-align: center;
+	display: none;
+	margin-bottom: 100px;
+}
+
+div#toast-wrapper {
+	position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+div#toast {
+	font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #3c3c3c;
+    display: inline-block;
+    padding: 3px 11px 5px;
+    border-radius: 4px;
+    color: #d2d2d2;
+    text-shadow: none;
+    font-weight: 600;
+    letter-spacing: 0px;
+    margin-top: 5px;
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0, .5);
+    display: none;
+}
+
+.disabled {
+	user-select: none !important;
+	pointer-events:none !important;
+	background-color: #9c9c9c !important;
+	box-shadow: none !important;
+	color: rgb(199, 199, 199) !important;
+	
+}
+
+
+.abt-page {
+	text-align: center;
+	font-size: 25px;
+}
+
+.user-opts {
+	margin-top: 5%;
+	text-align: right;
+}
+
+
+.user-opts ul {
+	display: inline-block;
+}
+
+.user-opts ul li {
+	display: inline-block;
+    padding: 0px 10px;
+    font-size: 14px;
+    color: rgb(33, 32, 29);
+    font-weight: 600;
+    transition: all .2s ease;
+}
+
+.user-opts ul li:hover {
+	cursor: pointer;
+	color: gray;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+   // background-image: url('../image/bg-gif-1.gif');
+    box-shadow: 0px 1px 6px 0px rgba(0,0,0, .5);
+    border-radius: 4px;
+    background-color: #fbfbfb;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: -20px;
+    margin-right: -8px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modal-form {
+	display: none;
+	margin-top: 20px;
+}
+
+
+.modal-form header {
+	font-size: 2rem;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.small-info {
+	font-size: .8rem;
+	margin-top: 5px;
+    color: #adadad;
+    text-align: right;
+    margin-right: 5px;
+}
+
+
+#pid {
+	display:none;
+}
+
+.cl {
+	margin: 10px 0px;
+	margin-left: -5px;
+}
+
+.cr {
+	display: inline-block;
+    max-width: 300px;
+    min-width: 300px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0px 1px 5px -1px rgba(0,0,0, .5);
+    border-radius: 1px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.cr .title {
+	font-size: 1.1rem;
+	font-weight: 600;
+}
+
+.cr .mem-count {
+	font-size: .75rem;
+    margin: 10px 0px;
+    color: darkgray;
+	
+}
+
+
+.cr .creator {
+	font-size: .8rem;
+	font-weight: 600;
+	color: gray;
+}
+
+.cr .cd {
+	float: right;
+	font-size: .8rem;
+	font-weight: 600;
+}
+
+
+#console {
+	margin-top: 30px;
+	height: 200px;
+	overflow-y: auto;
+	border-radius: 3px;
+    box-shadow: inset 0px -1px 7px 0px rgba(0,0,0, .5);
+    display:none;
+    background-color: #fff; 
+}
+
+.log-info {
+	margin: 5px;
+	font-size: 12px;
+	color: #000;
+	
+}
+
+
+#status-bar {
+	position: absolute;
+    width: 100%;
+    text-align: center;
+    margin-top: -27px;
+}
+
+
+#status-bar div {
+	font-size: .83rem;
+    display: inline-block;
+    padding: 2px 6px;
+    background-color: #85929E;
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px 0px rgba(0,0,0,.5);
+    color: #fff;
+    opacity: 0;
+}

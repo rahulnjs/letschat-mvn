@@ -1,0 +1,43 @@
+<div id="new-cr-form" class="modal-form">
+	<header> Create a new chat room </header>
+	<section>
+		<table cellpadding="5" class="frm-tab">
+			<tr>
+				<td><span class="label">Chat Room Name</span></td>
+			</tr>
+			<tr>
+				<td><input type="text" class="ip-field" id="cr-name"
+					autocomplete="off">
+					<div class="small-info">use descriptive names</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center;"><br>
+					<button class="butt" id="new-cr-from-btn">Create</button></td>
+			</tr>
+		</table>
+		<br>
+	</section>
+</div>
+
+
+<div id="join-cr-form" class="modal-form">
+	<header> Join a chat room </header>
+	<section>
+		<table cellpadding="5" class="frm-tab">
+			<tr>
+				<td><span class="label">Chat Room Name</span></td>
+			</tr>
+			<tr>
+				<td><input type="text" class="ip-field" id="jcr-name"
+					autocomplete="off">
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center;"><br>
+					<button class="butt" id="join-cr-form-btn">Join</button></td>
+			</tr>
+		</table>
+		<br>
+	</section>
+</div>

@@ -1,0 +1,29 @@
+
+<div id="footer"
+	style="color: #3c3c3c; text-shadow: 1px .3px 1px black; margin-top: 2%; text-align: center;" onclick="$('#console').show()">
+	Copyright &copy; 2018, All Rights Reserved.</div>
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <%@ include file="modal-forms.jspf"%>
+  </div>
+
+</div>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="/resources/js/script.js"></script>
+<script type="text/javascript">
+	var page = $('#pid').text();
+	if(page != 'crp') {
+		$('#user-butt').remove();
+	}
+	
+	if(page === 'dbrd') {
+		fetchAllChatRooms();
+	} else if(page === 'crp') {
+		initChatRoom();
+	}
+</script>
