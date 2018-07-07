@@ -7,10 +7,10 @@
 		<div id="content">
 			<div id="strt-frm">
 				
-				<form action="" id="img-upl">
+				<!--<form action="" id="img-upl">
 					<input type="file" name="image" id="img">
 					<span id="upload-btn">upload</span>
-				</form>
+				</form>-->
 				<form onsubmit="return false;" id="login-form">
 					<table cellpadding="5" class="frm-tab">
 						<tr>
