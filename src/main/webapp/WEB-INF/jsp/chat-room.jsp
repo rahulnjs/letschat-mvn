@@ -1,11 +1,10 @@
 <%@include file="common_h.jspf" %>
-<body onload="geoFindMe()" style="overflow-x: hidden;">
+<body style="overflow-x: hidden;">
 	<div id="header">
 		<%@include file="header.jspf" %>
 	</div>
 	<div id="cc"></div>
 	<div id="wrapper">
-		<span id="chat-data" style="display:none;">${cr}</span>
 		<span id="pid">crp</span>
 		<div id="content">
 			<div id="container">

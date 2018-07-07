@@ -1,7 +1,6 @@
 package com.chat.controller.ws;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.InputStream;
-import java.net.URL;
-import javax.net.ssl.HttpsURLConnection;
 
 import com.chat.component.Worker;
 
@@ -88,9 +84,14 @@ public class ApplicationController {
 		if(s == null) {
 			return "redirect:/ ";
 		} else {
-			req.setAttribute("cr", worker.getChatRoom(chatRoom));
 			return "chat-room";
 		}
+	}
+
+	@ResponseBody
+	@RequestMapping("/chat/{chatRoom}/init")
+	public String initChatRoom(@PathVariable String chatRoom) {
+		return worker.getChatRoom(chatRoom);
 	}
 	
 	@ResponseBody

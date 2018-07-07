@@ -14,16 +14,20 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="/resources/js/script.js"></script>
+<!--<script src="/resources/js/script.js"></script>-->
 <script type="text/javascript">
-	var page = $('#pid').text();
-	if(page != 'crp') {
-		$('#user-butt').remove();
-	}
+	var t = new Date();
+	$.getScript('/resources/js/script.js?' + t.getTime(), function() {
+		var page = $('#pid').text();
+		if(page != 'crp') {
+			$('#user-butt').remove();
+		}
+		
+		if(page === 'dbrd') {
+			fetchAllChatRooms();
+		} else if(page === 'crp') {
+			initChatRoom();
+		}
+	});
 	
-	if(page === 'dbrd') {
-		fetchAllChatRooms();
-	} else if(page === 'crp') {
-		initChatRoom();
-	}
 </script>

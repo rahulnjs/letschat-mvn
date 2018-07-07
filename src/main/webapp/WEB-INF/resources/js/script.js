@@ -1,6 +1,4 @@
 
-var lng = 77.12;
-var lat = 28.38;
 var lastMsgTime = 0;
 var secondLast;
 var startDate='';
@@ -346,50 +344,17 @@ function addNewBubble(msg) {
 
 function startServices() {
 	var msgFetcher = setInterval(getMsgs, 1000);
-	/*var statusPoster = setInterval(postStatus, 1000);
-	var statusFetcher = setInterval(getStatuses, 1000);*/
-}
-
-function geoFindMe() {
-    getTime();
-	startServices();
-	if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success, error, geoOptions);
-    } else {
-        alert("Geolocation services are not supported by your web browser.");
-    }
-}
-
-function success(position) {
-    lat = position.coords.latitude;
-    lng = position.coords.longitude;
-    //getTime();
-}
-
-function error(error) {
-    //alert("Unable to retrieve your location due to " + error.code + ": " + error.message);
-	//getTime();
-}
-
-var geoOptions = {
-    enableHighAccuracy: true,
-    maximumAge: 30000,
-    timeout: 2700
-};
-
-
-function getQueryString() {
-	var req = 'http://api.geonames.org/timezoneJSON?lat=' + lat +'&lng=' + lng + '&username=rahulEE';
-	return req;
 }
 
 function getTime() {
 	$.ajax({
 		method: 'get',
-		url: getQueryString(),
+		url: 'https://api.ipgeolocation.io/ipgeo?apiKey=9c19f884bafd4dd281381936964a6982',
 		data: {}		
 	}).done(function(msg) {
-		cT = msg.time;
+		//console.dir(msg);
+		startServices();
+		cT = msg.timeZone.currentTime.substr(16);
 		if(stD == 0) {
 			startDate = cT;
 			stD++;
@@ -739,14 +704,18 @@ function toMemStatus(users) {
 
 function toDate(d) {
 	var date = new Date(d);
-	return date.toDateString();
+	return date.toDateString();F
 }
 
 
 function initChatRoom() {
-	var data = $.parseJSON($('#chat-data').text());
-	$('#chat-box-header').text(data.name);
-	showUsers(data.users, data.creator);
+	$.get(window.location.pathname + '/init', function(res) {
+		var data = $.parseJSON(res);
+		$('#chat-box-header').text(data.name);
+		showUsers(data.users, data.creator);
+		getTime();
+	});
+	
 }
 
 function showUsers(users, creator) {
