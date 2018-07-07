@@ -124,6 +124,7 @@ function updateStatus(jsonObj) {
 		if($('#usr-' + name).length === 1) {
 			if(name != cuser()) {
 				determineStatus(jsonObj[i]);
+				$('#st-' + name).text(jsonObj[i].status);
 				if(jsonObj[i].status.charAt(0) == 'T') {
 					if(oneName == '') {
 						oneName = jsonObj[i].fname.split(' ')[0];
@@ -175,12 +176,12 @@ function determineStatus(u) {
 	var now = new Date(cT);
 	if(/^\d\d\d\d/.test(status)) {
 		var st = new Date(status);
-		var diff = now.getTime() - st.getTime();
+		var diff = (now.getTime() - st.getTime()) / 1000;
 		var time = st.toLocaleString().split(',')[1].trim().replace(':00', '');
-		diff /= 1000;
 		if(diff < 60) {
 			status = 'Online';
 		} else {
+			
 			var dateDiff = now.getDate() - st.getDate(); 
 			if(dateDiff == 0) {
 				status = 'Last seen today at ' + time;
@@ -205,7 +206,7 @@ function getMsgs() {
 			data: postStatus()
 		}).done(function(data) {
 			data = $.parseJSON(data);
-			log('getMsgs(' + lastMsgTime + '):138, ' + data.msg.length + ' msgs fetched');
+			//log('getMsgs(' + lastMsgTime + '):138, ' + data.msg.length + ' msgs fetched');
 			renderMsgs(data.msg);
 			updateStatus(data.status);
 			rC = true;
@@ -349,12 +350,10 @@ function startServices() {
 function getTime() {
 	$.ajax({
 		method: 'get',
-		url: 'https://api.ipgeolocation.io/ipgeo?apiKey=9c19f884bafd4dd281381936964a6982',
-		data: {}		
+		url: 'https://api.ipgeolocation.io/ipgeo?apiKey=9c19f884bafd4dd281381936964a6982',		
 	}).done(function(msg) {
-		//console.dir(msg);
 		startServices();
-		cT = msg.timeZone.currentTime.substr(16);
+		cT = msg.time_zone.current_time.substr(0, 16);
 		if(stD == 0) {
 			startDate = cT;
 			stD++;
