@@ -58,10 +58,7 @@
 		width: 100%;
 	}
 
-	/*table.hdr-tab {
-	margin: 0px auto;
-	width: 100%;
-}*/
+
 	input:focus {
 		outline: none;
 	}
