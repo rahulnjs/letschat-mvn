@@ -21,7 +21,7 @@
 		overflow-x : hidden;
 	}
 	#content {
-		//padding-top: 50px;
+		padding-top: 22px;
 	}
 	#footer {
 		bottom: 0;
@@ -166,7 +166,7 @@
 		width: 90%;
 	}
 	#content {
-		padding-top: 30px;
+		padding-top: 50px;
 		min-height: 550px;
 	}
 	#footer {

@@ -66,10 +66,10 @@ function doPostMsg(e){
 	}
 }
 
-$('#send-butt').click(postThisMessage);
+$('#send-btn').click(postThisMessage);
 
 function postThisMessage() {
-	if($('#text-ip').val().trim().length > 0) {
+	if($('.text-area').html().length > 0) {
 		postMessage();
 	}
 }
@@ -97,7 +97,7 @@ function scrollToChatBoxBottom() {
 	    height += parseInt($(this).height());
 	});
 	height += 30;
-	$('#chat-box').animate({scrollTop: '' + height});
+	$('#chat-box').animate({scrollTop: '' + height}, 100);
 }
 
 function getFormattedTime(time) {
@@ -198,7 +198,6 @@ function determineStatus(u) {
 
 function getMsgs() {
 	if(rC) {
-		log('getMsgs():130, getting msgs');
 		rC = false;
 		$.ajax({
 			method: 'get',
@@ -206,13 +205,10 @@ function getMsgs() {
 			data: postStatus()
 		}).done(function(data) {
 			data = $.parseJSON(data);
-			//log('getMsgs(' + lastMsgTime + '):138, ' + data.msg.length + ' msgs fetched');
 			renderMsgs(data.msg);
 			updateStatus(data.status);
 			rC = true;
 		});
-	} else {
-		log('getMsgs():144, not getting msgs as last call is not completed yet');
 	}
 }
 function renderMsgs(msgs) {
@@ -260,9 +256,7 @@ function formatAtProp(msg) {
 }
 
 function getIncomingBubble(msg) {
-	if(msg.type == 'text') {
-		return getIText(msg);
-	}
+	return getIText(msg);
 } 
 
 
@@ -271,7 +265,7 @@ function getIText(msg) {
 				'<div class="msg in">' +
 					'<div class="msg-by-wrapper">' + 
 						'<span class="msg-by">' + msg.by + '</span></div>' +
-				'<div class="main-msg">' + msg.msg + '</div>' + 
+				'<div class="main-msg">' + processMsg(msg) + '</div>' + 
 				'<div class="time-bar incoming">' +
 					'<span class="time">' + msg.at + '</span>' +
 			  '</div></div></div>';
@@ -279,19 +273,27 @@ function getIText(msg) {
 
 
 function getOutgoingBubble(msg) {
-	if(msg.type == 'text') {
-		return getOText(msg);
-	}
+	return getOText(msg);
 } 
 
 
 function getOText(msg) {
 	return '<div class="msg-wrapper outgoing" id="msg-' + msg.time.$numberLong + '">' + 
 				'<div class="msg out">' +
-				'<div class="main-msg">' + msg.msg + '</div>' +
+				'<div class="main-msg">' + processMsg(msg) + '</div>' +
 				'<div class="time-bar outgoing">' +
 				'<span class="time"> ' + msg.at + '&nbsp;&nbsp;<span class="tick"><i class="fas fa-check"></i><span></span>' +
 			'</div></div></div>';
+}
+
+
+function processMsg(msg) {
+	var link = /https?:\/\/[a-z0-9:&=\/?-]+/ig;
+	if(msg.type == 'text' && link.test(msg.msg)) {
+		var matches = link.exec(msg.msg);
+		console.dir(matches);
+	}
+	return msg.msg;
 }
 
 
@@ -304,11 +306,9 @@ function postStatus() {
 }
 
 function postMessage() {
-	var msg = $('#text-ip').val().trim();
-	$('#text-ip').val('');
+	var msg = $('.text-area').html();
+	$('.text-area').html('');
 	var data = {msg : msg, by: cuser(), type: 'text', at: cT};
-	//addNewBubble(data);
-	log('postMsg():240 Posting msg...');
 	$.ajax({
 		method: 'post',
 		url: window.location.pathname + '/post-msg',
@@ -316,10 +316,7 @@ function postMessage() {
 			msg: JSON.stringify(data)
 		}
 	}).done(function(res) {
-		log('postMsg():248 ' + res);
-		/*if(res == 'true') {
-			$('#bubble-' + data.time).css({'opacity': '1'});
-		}*/
+		checkForNewDate();
 	});
 }
 
@@ -348,6 +345,7 @@ function startServices() {
 }
 
 function getTime() {
+	//https://ipapi.co/json/
 	$.ajax({
 		method: 'get',
 		url: 'https://api.ipgeolocation.io/ipgeo?apiKey=9c19f884bafd4dd281381936964a6982',		
@@ -551,7 +549,7 @@ $('#join-cr-btn').on('click', function() {
 
 
 $('#new-cr-from-btn').on('click', function() {
-	var btn = $(this);
+	var $btn = $(this);
 	var cr = {
 		name: $('#cr-name').val().trim(),
 		slug: toSlug($('#cr-name').val()),
@@ -565,7 +563,9 @@ $('#new-cr-from-btn').on('click', function() {
 		}]
 	};
 	
-	if(cr.name.trim().length > 0) {
+	if(cr.name.length > 0) {
+		$('#new-cr-err').text('');
+		$btn.addClass(DISABLED);
 		$.ajax({
 			url : cuser() + '/create-cr',
 			method : 'post',
@@ -575,8 +575,8 @@ $('#new-cr-from-btn').on('click', function() {
 			success : function(data) {
 				if(data != 'un-auth') {
 					if (data == 'e') {
-						//handle this.
-						$butt.removeClass(DISABLED);
+						$('#new-cr-err').text('Chat Room name is already taken.');
+						$btn.removeClass(DISABLED);
 					} else {
 						window.location.assign('/chat/' + cr.slug);
 					}
@@ -592,13 +592,15 @@ $('#new-cr-from-btn').on('click', function() {
 
 
 $('#join-cr-form-btn').on('click', function() {
-	var btn = $(this);
+	var $btn = $(this);
 	var cr = toSlug($('#jcr-name').val());
 	var obj = {
 		user: cuser(),
 		status: '',
 		fname: fname()
 	};
+	$btn.addClass(DISABLED);
+	$('#join-cr-err').text('');
 	$.ajax({
 		url : cuser() + '/join-cr',
 		method : 'post',
@@ -610,7 +612,8 @@ $('#join-cr-form-btn').on('click', function() {
 			if(data == 'true') {
 				window.location.assign('/chat/' + cr);
 			} else {
-				//handle
+				$btn.removeClass(DISABLED);
+				$('#join-cr-err').text('Chat Room doesn\'t exist.');
 			}
 		},
 		error : function() {
@@ -739,6 +742,7 @@ function addMe(creator) {
 	$('#mem-list').append(getUserTemplate(u));
 	return `#ud-${u.user}`;
 }
+
 
 
 

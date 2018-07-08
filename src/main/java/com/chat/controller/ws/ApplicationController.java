@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 
 import com.chat.component.Worker;
 
@@ -17,7 +18,7 @@ import com.chat.component.Worker;
 public class ApplicationController {
 	
 	Worker worker = new Worker();
-
+	public static long TIME = new Date().getTime();
 
 	@RequestMapping("/")
 	public String index() {

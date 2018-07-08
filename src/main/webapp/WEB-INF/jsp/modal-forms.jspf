@@ -1,5 +1,6 @@
 <div id="new-cr-form" class="modal-form">
 	<header> Create a new chat room </header>
+	<div class="modal-err" id="new-cr-err"></div>
 	<section>
 		<table cellpadding="5" class="frm-tab">
 			<tr>
@@ -23,6 +24,7 @@
 
 <div id="join-cr-form" class="modal-form">
 	<header> Join a chat room </header>
+	<div class="modal-err" id="join-cr-err"></div>
 	<section>
 		<table cellpadding="5" class="frm-tab">
 			<tr>
