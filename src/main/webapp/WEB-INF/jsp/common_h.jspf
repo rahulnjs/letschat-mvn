@@ -11,7 +11,7 @@
 <link rel="icon" href="/resources/image/Chat.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css?v=<%=ApplicationController.TIME%>">
 <link rel="stylesheet" media=" only screen and (max-device-width : 768px)" href="/resources/css/mobile-style.css">
 <link rel="stylesheet" media=" only screen  and (min-device-width: 769px) and (max-device-width: 1600px) " href="/resources/css/pc-style.css">
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
