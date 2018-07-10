@@ -110,6 +110,17 @@ public class Worker {
 		return s;
 	}
 	
+	public String getUserStatus(String slug) {
+		BasicDBObject qry = new BasicDBObject();
+		qry.put("slug", slug);
+		FindIterable<Document> result = MongoDB._cln(CHAT)
+					.find(qry).projection(Projections.exclude("msgs"));
+		String statuses = toJSON(result.first().get("users"));
+		result.iterator().close();
+		return statuses;
+	}
+	
+	
 	public String getAllMsg(String slug) {
 		BasicDBObject qry = new BasicDBObject();
 		qry.put("cr", slug);
@@ -136,16 +147,26 @@ public class Worker {
 		return i > 0;
 	}
 	
-	public boolean postMsg(String slug, String json) {
+	public boolean setStatus(String slug, String status, String user) {
+		BasicDBObject qry = new BasicDBObject();
+		qry.put("users.user", user);
+		qry.put("slug", slug);
+		BasicDBObject qry2 = new BasicDBObject();
+		qry2.put("users.$.status", status);
+		long i = MongoDB._cln(CHAT).updateOne(qry, new Document("$set", qry2)).getModifiedCount();
+		return i > 0;
+	}
+	
+	public String postMsg(String slug, String json) {
 		try {
 			Document doc = Document.parse(json);
 			doc.put("cr", slug);
 			doc.put("time", new Date().getTime());
 			MongoDB._cln(CHAT_MSG).insertOne(doc);
-			return true;
+			return doc.toJson();
 		} catch (Exception e) {
-			System.out.println(e);
-			return false;
+			//System.out.println(e);
+			return "NULL";
 		}
 	}
 	

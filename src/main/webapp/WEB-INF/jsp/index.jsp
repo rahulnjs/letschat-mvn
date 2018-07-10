@@ -1,8 +1,6 @@
 <%@include file="common_h.jspf" %>
 <body  style="overflow-x: hidden;">
-	<div id="header">
-		<%@include file="header.jspf" %>
-	</div>
+	<%@include file="header.jspf" %>
 	<div id="wrapper">
 		<div id="content">
 			<div id="strt-frm">

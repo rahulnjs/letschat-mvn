@@ -580,8 +580,8 @@ div#toast {
 
 .sndr-body .emo-btn {
 	position: absolute;
-    bottom:36px;
-    left: 7px;
+    bottom:30px;
+    left: 8px;
     opacity: .6;
 }
 
@@ -598,3 +598,51 @@ div#toast {
 	display: block; 
 	color: #839192;
   }
+
+
+#chat-options {
+    background: #fff;
+    position: absolute;
+    bottom: 60px;
+	width: 100%;
+	box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, .1);
+	display: none;
+}
+
+#co-hdr {
+	padding: 5px;
+	position: relative;
+	z-index: 8;
+}
+
+#co-hdr-txt {
+	font-size: 14px;
+    font-weight: 600;
+}
+
+#co-cls-btn {
+	position: absolute;
+	right: 5px;
+	color: #aaaaaa;
+    font-size: 20px;
+	font-weight: bold;
+	top: -1px;
+}
+
+#co-cls-btn:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#co-body {
+
+}
+
+.emo {
+
+}
+
+#co-footer {
+
+}

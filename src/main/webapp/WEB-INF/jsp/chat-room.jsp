@@ -1,8 +1,6 @@
 <%@include file="common_h.jspf" %>
 <body style="overflow-x: hidden;">
-	<div id="header">
-		<%@include file="header.jspf" %>
-	</div>
+	<%@include file="header.jspf" %>
 	<div id="cc"></div>
 	<div id="wrapper">
 		<span id="pid">crp</span>
@@ -20,6 +18,20 @@
 
 					<div id="chat-box"></div>
 					<div id="sender">
+						<div id="chat-options">
+							<div id="co-hdr">
+								<div id="co-hdr-txt">
+										
+								</div>
+								<div id="co-cls-btn">
+									&times;
+								</div>
+							</div>
+							<div id="co-body">
+							</div>
+							<div id="co-footer">
+							</div>
+						</div>
 						<div id="status-bar" >
 							<div>
 								<i class="fas fa-comment-alt"></i>&nbsp; 
@@ -27,11 +39,11 @@
 							</div>
 						</div>
 						<div class="sndr-body">
-							<div class="emo-btn">
+							<div class="emo-btn" id="emo-btn">
 								<i class="far fa-smile"></i>
 							</div>
 							<div class="text-area" contenteditable="true" placeholder="Start typing..."></div>
-							<div class="image-btn">
+							<div class="image-btn" id="image-btn">
 								<i class="fas fa-image"></i>
 							</div>
 							<div class="send-btn" id="send-btn">

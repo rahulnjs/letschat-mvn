@@ -1,16 +1,20 @@
-<table class="hdr-tab" style="width: 100%;">
-	<tr>
-		<td style="width: 32px;"><img src="/resources/image/Chat.png" width="32"
-			height="32">
-		<td style="text-align: left;">Let's Chat</td>
-		<td style="text-align: right; padding-right: 8px; width: 30px;">
-					<div id="user-butt">
-						<span style="font-size: medium;"><i class="fa fa-users"></i></span>
-					</div>
-				</td>
-	</tr>
-</table>
-<div id="toast-wrapper">	
-	<div id="toast">
+<div id="header">
+	<div style="position: relative; line-height: 65px;">
+		<div style="display: inline-block;">
+			<img src="/resources/image/Chat.png" width="32"
+					height="32">
+		</div>
+		<div style="display: inline-block;">
+			Let's Chat
+		</div>
+		<div style="position: absolute;right: 12px; top: 12px; line-height:  0px;">
+			<div id="user-butt">
+				<span style="font-size: medium;"><i class="fas fa-users"></i></span>
+			</div>
+		</div>
+	</div>
+	<div id="toast-wrapper">	
+		<div id="toast">
+		</div>
 	</div>
 </div>
