@@ -21,7 +21,7 @@
 						<div id="chat-options">
 							<div id="co-hdr">
 								<div id="co-hdr-txt">
-										
+									Chat Options	
 								</div>
 								<div id="co-cls-btn">
 									&times;
@@ -30,6 +30,7 @@
 							<div id="co-body">
 							</div>
 							<div id="co-footer">
+								I am footer <i class="fas fa-dizzy"></i>
 							</div>
 						</div>
 						<div id="status-bar" >

@@ -785,6 +785,7 @@ $('#emo-btn').on('click', function () {
 			</div>
 		`);
 	});
+	$('#chat-options').show();
 });
 
 
@@ -874,6 +875,7 @@ function doConnectViaWS() {
 
 	ws.onclose = function () {
 		console.log('connection closed');
+		doConnectViaWS();
 	};
 
 	ws.onerror = function () {
@@ -882,5 +884,9 @@ function doConnectViaWS() {
 }
 
 function sendWSMsg(msg) {
-	ws.send(msg);
+	try {
+		ws.send(msg);
+	} catch(error) {
+		alert(error);
+	}
 }

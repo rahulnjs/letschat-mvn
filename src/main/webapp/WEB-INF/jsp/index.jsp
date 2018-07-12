@@ -12,7 +12,7 @@
 				<form onsubmit="return false;" id="login-form">
 					<table cellpadding="5" class="frm-tab">
 						<tr>
-							<td style="text-align: center;">
+							<td style="text-align: center; height: 30px;">
 								<span class="error" id="err-txt"></span>
 							</td>
 						</tr>
@@ -45,7 +45,7 @@
 						<tr>
 							<td style="text-align: center;">
 								<br>
-								<a href="/signup">Sign Up</a>
+								<a href="/signup" class="log-sin-btn">Sign Up</a>
 							</td>
 						</tr>
 					</table>

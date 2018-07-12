@@ -605,6 +605,8 @@ div#toast {
     position: absolute;
     bottom: 60px;
 	width: 100%;
+	max-height: 200px;
+	overflow-y: auto;
 	box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, .1);
 	display: none;
 }
@@ -613,6 +615,7 @@ div#toast {
 	padding: 5px;
 	position: relative;
 	z-index: 8;
+	box-shadow: 0px 0px 1px 0px rgba(0,0,0, .1);
 }
 
 #co-hdr-txt {
@@ -626,7 +629,7 @@ div#toast {
 	color: #aaaaaa;
     font-size: 20px;
 	font-weight: bold;
-	top: -1px;
+	top: 1px;
 }
 
 #co-cls-btn:hover {
@@ -636,13 +639,42 @@ div#toast {
 }
 
 #co-body {
-
+    min-height: 100px;
+    max-height: 100px;
+    overflow-y: auto;
 }
 
 .emo {
+	display: inline-block;
+	padding: 5px;
 
 }
 
 #co-footer {
+	display: block;
+	text-align: center;
+	padding: 5px 0px;
+}
 
+
+.log-sin-btn {
+    text-decoration: none;
+    padding: 2px 1px 9px 5px;
+    display: block;
+    border-radius: 5px;
+    font-weight: 600;
+    border: 2px solid #675d5d;
+	color: #3c3c3c;
+	font-family: 'Chewy', cursive;
+    font-size: 18px;
+}
+
+.log-sin-btn:before {
+	content: 'or';
+    margin-top: -32px;
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: gray;
 }

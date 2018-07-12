@@ -16,11 +16,11 @@
 	}
 	#wrapper {
 		margin: 0px auto;
-		width: 98%;
+		width: 99%;
 		overflow-x : hidden;
 	}
 	#content {
-		padding-top: 22px;
+		padding: 22px 2px;
 	}
 	#footer {
 		bottom: 0;

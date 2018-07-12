@@ -9,7 +9,7 @@
 <title>Let's Chat</title>
 
 <link rel="icon" href="/resources/image/Chat.png" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css?v=<%=ApplicationController.TIME%>">
 <link rel="stylesheet" media=" only screen and (max-device-width : 768px)"

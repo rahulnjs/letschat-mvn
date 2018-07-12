@@ -62,7 +62,7 @@
 						<tr>
 							<td style="text-align: center;">
 								<br>
-								<a href="/">login</a>
+								<a href="/" class="log-sin-btn">login</a>
 							</td>
 						</tr>
 					</table>
