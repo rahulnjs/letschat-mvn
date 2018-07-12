@@ -123,6 +123,7 @@ function getFormattedTime(time) {
 
 function updateStatus(jsonObj) {
 	//console.dir(jsonObj);
+	hideTypeS();
 	var i = 0;
 	var oneName = '';
 	var userCount = 0;
@@ -157,9 +158,7 @@ function updateStatus(jsonObj) {
 			msg += ' is ';
 		}
 		showTypeS(msg + ' typing...');
-	} else {
-		hideTypeS();
-	}
+	} 
 
 }
 
@@ -849,7 +848,9 @@ var emojis = {
 var ws;
 
 function doConnectViaWS() {
-	ws = new WebSocket('ws://localhost:8080/chat');
+	var wsUrl = window.location.origin.replace('http', 'ws');
+	
+	ws = new WebSocket(wsUrl + '/chat');
 
 	ws.onopen = function () {
 		ws.send('i' + crn() + '=' + window.localStorage.user);
