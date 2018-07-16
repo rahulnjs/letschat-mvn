@@ -30,7 +30,17 @@
 							<div id="co-body">
 							</div>
 							<div id="co-footer">
-								I am footer <i class="fas fa-dizzy"></i>
+								<div class="row">
+									<div class="c3">
+										emoji
+									</div>
+									<div class="c3" id="sticker-tab-btn">
+										sticker
+									</div>
+									<div class="c3" id="gif-tab-btn">
+										gif
+									</div>
+								</div>
 							</div>
 						</div>
 						<div id="status-bar" >

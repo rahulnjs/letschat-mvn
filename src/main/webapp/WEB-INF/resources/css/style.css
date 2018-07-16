@@ -214,7 +214,8 @@ textarea:focus {
 
 .main-msg {
 	font-size: 13px;
-    font-weight: 600;
+	font-weight: 600;
+	position: relative;
 }
 
 
@@ -488,7 +489,7 @@ div#toast {
 	position: absolute;
     width: 100%;
     text-align: center;
-    margin-top: -27px;
+    margin-top: -33px;
 }
 
 
@@ -538,7 +539,6 @@ div#toast {
     position: relative;
     height: 58px;
     padding: 2px 0px 2px 0px;
-	box-shadow: inset 0px 0px 2px 0px #ccc;
 	border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
 }
@@ -549,13 +549,16 @@ div#toast {
 	color: #3c3c3c;
     font-family: 'Open Sans', sans-serif;
     border-radius: 5px;
-    font-size: small;
+	font-size: 14px;
+	font-weight: 600;
     max-height: 50px;
     height: 50px;
     line-height: 25px;
     margin-right: 34px;
     padding: 3px 0px 3px 31px;
-    overflow-y: auto;
+	overflow-y: auto;
+	position: relative;
+	z-index: 3;
 }
 
 .sndr-body .send-btn {
@@ -568,7 +571,8 @@ div#toast {
     background-color: #3c3c3c;
     border-radius: 50%;
     font-size: 13px;
-    box-sizing: border-box;
+	box-sizing: border-box;
+	z-index: 5;
 }
 
 .sndr-body .more-opt-btn {
@@ -582,7 +586,8 @@ div#toast {
 	position: absolute;
     bottom:30px;
     left: 8px;
-    opacity: .6;
+	opacity: .6;
+	z-index: 5;
 }
 
 .sndr-body .image-btn {
@@ -590,6 +595,7 @@ div#toast {
     position: absolute;
 	left: 7px;
 	opacity: .6;
+	z-index: 5;
 }
 
 
@@ -606,7 +612,7 @@ div#toast {
     bottom: 60px;
 	width: 100%;
 	max-height: 200px;
-	overflow-y: auto;
+	min-height: 200px;
 	box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, .1);
 	display: none;
 }
@@ -639,21 +645,42 @@ div#toast {
 }
 
 #co-body {
-    min-height: 100px;
-    max-height: 100px;
-    overflow-y: auto;
+	min-height: 142px;
+    max-height: 142px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-left: 7px;
+	user-select: none;
 }
 
 .emo {
 	display: inline-block;
-	padding: 5px;
+	padding: 3px;
 
+}
+
+.emo img {
+	width: 24px;
+	height: 24px;
+}
+
+.emo-text {
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	margin-top: -14px;
+}
+
+div.text-emo {
+	display: inline-block;
+	width: 14px;
 }
 
 #co-footer {
 	display: block;
 	text-align: center;
 	padding: 5px 0px;
+	height: 20px;
 }
 
 
@@ -677,4 +704,16 @@ div#toast {
     font-size: 14px;
     margin-bottom: 18px;
     color: gray;
+}
+
+
+.row:after {
+	display: table;
+}
+
+
+.row .c3 {
+	float: left;
+	width: 33.3%;
+	font-size: 13px;
 }

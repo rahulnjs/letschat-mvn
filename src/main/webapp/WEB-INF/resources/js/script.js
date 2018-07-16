@@ -158,7 +158,7 @@ function updateStatus(jsonObj) {
 			msg += ' is ';
 		}
 		showTypeS(msg + ' typing...');
-	} 
+	}
 
 }
 
@@ -776,38 +776,50 @@ $('#upload-btn').on('click', function () {
 	}
 });
 
+
+var $CHAT_OPTS = $('#chat-options');
+const EMO_URL = 'https://emojipedia-us.s3.amazonaws.com/thumbs/72/whatsapp/116/';
+
 $('#emo-btn').on('click', function () {
-	var $body = $('#co-body');
-	emojis.emo.forEach(function (e) {
+	var $body = $('#co-body').html('');
+	emoList.forEach(function (e) {
 		$body.append(`
 			<div class="emo" data-emo="${e}">
-				<i class="fas fa-${e}"></i>
+				<img src="${EMO_URL}${e}">
 			</div>
 		`);
 	});
-	$('#chat-options').show();
+	$CHAT_OPTS.show();
 });
 
+
+$('#co-body').on('click', '.emo', function() {
+	var url = $(this).attr('data-emo');
+	$('.text-area').html($('.text-area').html() + 
+		`<div class="text-emo"><img src="${EMO_URL}${url}" class="emo-text"></div> &nbsp;`);
+});
 
 var charCounter = 0;
 var lastCharTyped;
 var keyStrokeTimer;
 var intervalsPassed;
 
-$('.text-area').on('keyup', function() {
-	if(keyStrokeTimer) { clearInterval(keyStrokeTimer); }
+$('.text-area').on('keyup', function () {
+	if (keyStrokeTimer) {
+		clearInterval(keyStrokeTimer);
+	}
 	charCounter++;
 	lastCharTyped = (new Date()).getTime();
 	intervalsPassed = 0;
 	keyStrokeTimer = setInterval(keyStrokeListner, 1000);
-	if(charCounter == 7) {
+	if (charCounter == 7) {
 		sendWSMsg('s' + crn() + DELIM + 'Typing...' + DELIM + cuser());
 		charCounter = 0;
 	}
 
 	function keyStrokeListner() {
 		intervalsPassed++;
-		if(intervalsPassed > 4) {
+		if (intervalsPassed > 4) {
 			postStatusAsNotTyping();
 			clearInterval(keyStrokeTimer);
 		}
@@ -816,7 +828,7 @@ $('.text-area').on('keyup', function() {
 
 
 
-$('.text-area').on('blur', function() {
+$('.text-area').on('blur', function () {
 	postStatusAsNotTyping();
 });
 
@@ -824,6 +836,11 @@ function postStatusAsNotTyping() {
 	sendWSMsg('s' + crn() + DELIM + cT + DELIM + cuser());
 }
 
+
+
+$('#co-cls-btn').on('click', function () {
+	$CHAT_OPTS.hide();
+});
 
 var emojis = {
 	emo: [
@@ -840,6 +857,9 @@ var emojis = {
 };
 
 
+// https://api.giphy.com/v1/gifs/trending?api_key=EBWLu12HNKXszbvnjYV0tUqVnapD2jrh&limit=25&rating=G
+// https://api.giphy.com/v1/stickers/trending?api_key=EBWLu12HNKXszbvnjYV0tUqVnapD2jrh&limit=25&rating=G
+
 
 /********
  * Web Socket Code
@@ -850,7 +870,7 @@ var ws;
 
 function doConnectViaWS() {
 	var wsUrl = window.location.origin.replace('http', 'ws');
-	
+
 	ws = new WebSocket(wsUrl + '/chat');
 
 	ws.onopen = function () {
@@ -867,7 +887,7 @@ function doConnectViaWS() {
 					renderMsgs($.parseJSON('[' + data + ']'));
 				}
 				break;
-			case 's': 
+			case 's':
 				updateStatus($.parseJSON(data));
 				break;
 		}
@@ -886,7 +906,156 @@ function doConnectViaWS() {
 function sendWSMsg(msg) {
 	try {
 		ws.send(msg);
-	} catch(error) {
+	} catch (error) {
 		alert(error);
 	}
 }
+
+
+
+
+/**
+ * EMO
+ * 
+ */
+
+var emoList = [
+	"grinning-face_1f600.png",
+	"grinning-face-with-smiling-eyes_1f601.png",
+	"face-with-tears-of-joy_1f602.png",
+	"rolling-on-the-floor-laughing_1f923.png",
+	"smiling-face-with-open-mouth_1f603.png",
+	"smiling-face-with-open-mouth-and-smiling-eyes_1f604.png",
+	"smiling-face-with-open-mouth-and-cold-sweat_1f605.png",
+	"smiling-face-with-open-mouth-and-tightly-closed-eyes_1f606.png",
+	"winking-face_1f609.png",
+	"smiling-face-with-smiling-eyes_1f60a.png",
+	"face-savouring-delicious-food_1f60b.png",
+	"smiling-face-with-sunglasses_1f60e.png",
+	"smiling-face-with-heart-shaped-eyes_1f60d.png",
+	"face-throwing-a-kiss_1f618.png",
+	"kissing-face_1f617.png",
+	"kissing-face-with-smiling-eyes_1f619.png",
+	"kissing-face-with-closed-eyes_1f61a.png",
+	"white-smiling-face_263a.png",
+	"slightly-smiling-face_1f642.png",
+	"hugging-face_1f917.png",
+	"grinning-face-with-star-eyes_1f929.png",
+	"thinking-face_1f914.png",
+	"face-with-one-eyebrow-raised_1f928.png",
+	"neutral-face_1f610.png",
+	"expressionless-face_1f611.png",
+	"face-without-mouth_1f636.png",
+	"face-with-rolling-eyes_1f644.png",
+	"smirking-face_1f60f.png",
+	"persevering-face_1f623.png",
+	"disappointed-but-relieved-face_1f625.png",
+	"face-with-open-mouth_1f62e.png",
+	"zipper-mouth-face_1f910.png",
+	"hushed-face_1f62f.png",
+	"sleepy-face_1f62a.png",
+	"tired-face_1f62b.png",
+	"sleeping-face_1f634.png",
+	"relieved-face_1f60c.png",
+	"face-with-stuck-out-tongue_1f61b.png",
+	"face-with-stuck-out-tongue-and-winking-eye_1f61c.png",
+	"face-with-stuck-out-tongue-and-tightly-closed-eyes_1f61d.png",
+	"drooling-face_1f924.png",
+	"unamused-face_1f612.png",
+	"face-with-cold-sweat_1f613.png",
+	"pensive-face_1f614.png",
+	"confused-face_1f615.png",
+	"upside-down-face_1f643.png",
+	"money-mouth-face_1f911.png",
+	"astonished-face_1f632.png",
+	"white-frowning-face_2639.png",
+	"slightly-frowning-face_1f641.png",
+	"confounded-face_1f616.png",
+	"disappointed-face_1f61e.png",
+	"worried-face_1f61f.png",
+	"face-with-look-of-triumph_1f624.png",
+	"crying-face_1f622.png",
+	"loudly-crying-face_1f62d.png",
+	"frowning-face-with-open-mouth_1f626.png",
+	"anguished-face_1f627.png",
+	"fearful-face_1f628.png",
+	"weary-face_1f629.png",
+	"shocked-face-with-exploding-head_1f92f.png",
+	"grimacing-face_1f62c.png",
+	"face-with-open-mouth-and-cold-sweat_1f630.png",
+	"face-screaming-in-fear_1f631.png",
+	"flushed-face_1f633.png",
+	"grinning-face-with-one-large-and-one-small-eye_1f92a.png",
+	"dizzy-face_1f635.png",
+	"pouting-face_1f621.png",
+	"angry-face_1f620.png",
+	"serious-face-with-symbols-covering-mouth_1f92c.png",
+	"face-with-medical-mask_1f637.png",
+	"face-with-thermometer_1f912.png",
+	"face-with-head-bandage_1f915.png",
+	"nauseated-face_1f922.png",
+	"face-with-open-mouth-vomiting_1f92e.png",
+	"sneezing-face_1f927.png",
+	"smiling-face-with-halo_1f607.png",
+	"face-with-cowboy-hat_1f920.png",
+	"clown-face_1f921.png",
+	"lying-face_1f925.png",
+	"face-with-finger-covering-closed-lips_1f92b.png",
+	"smiling-face-with-smiling-eyes-and-hand-covering-mouth_1f92d.png",
+	"face-with-monocle_1f9d0.png",
+	"nerd-face_1f913.png",
+	"smiling-face-with-horns_1f608.png",
+	"imp_1f47f.png",
+	"japanese-ogre_1f479.png",
+	"japanese-goblin_1f47a.png",
+	"skull_1f480.png",
+	"skull-and-crossbones_2620.png",
+	"ghost_1f47b.png",
+	"extraterrestrial-alien_1f47d.png",
+	"alien-monster_1f47e.png",
+	"robot-face_1f916.png",
+	"pile-of-poo_1f4a9.png",
+	"smiling-cat-face-with-open-mouth_1f63a.png",
+	"grinning-cat-face-with-smiling-eyes_1f638.png",
+	"cat-face-with-tears-of-joy_1f639.png",
+	"smiling-cat-face-with-heart-shaped-eyes_1f63b.png",
+	"cat-face-with-wry-smile_1f63c.png",
+	"kissing-cat-face-with-closed-eyes_1f63d.png",
+	"weary-cat-face_1f640.png",
+	"crying-cat-face_1f63f.png",
+	"pouting-cat-face_1f63e.png",
+	"see-no-evil-monkey_1f648.png",
+	"hear-no-evil-monkey_1f649.png",
+	"emoji-modifier-fitzpatrick-type-1-2_1f3fb.png",
+	"baby_emoji-modifier-fitzpatrick-type-1-2_1f476-1f3fb_1f3fb.png",
+	"child_emoji-modifier-fitzpatrick-type-1-2_1f9d2-1f3fb_1f3fb.png",
+	"boy_emoji-modifier-fitzpatrick-type-1-2_1f466-1f3fb_1f3fb.png",
+	"girl_emoji-modifier-fitzpatrick-type-1-2_1f467-1f3fb_1f3fb.png",
+	"adult_emoji-modifier-fitzpatrick-type-1-2_1f9d1-1f3fb_1f3fb.png",
+	"man_emoji-modifier-fitzpatrick-type-1-2_1f468-1f3fb_1f3fb.png",
+	"woman_emoji-modifier-fitzpatrick-type-1-2_1f469-1f3fb_1f3fb.png",
+	"older-adult_emoji-modifier-fitzpatrick-type-1-2_1f9d3-1f3fb_1f3fb.png",
+	"older-man_emoji-modifier-fitzpatrick-type-1-2_1f474-1f3fb_1f3fb.png",
+	"older-woman_emoji-modifier-fitzpatrick-type-1-2_1f475-1f3fb_1f3fb.png",
+	"male-health-worker-type-1-2_1f468-1f3fb-200d-2695-fe0f.png",
+	"female-health-worker-type-1-2_1f469-1f3fb-200d-2695-fe0f.png",
+	"male-student-type-1-2_1f468-1f3fb-200d-1f393.png",
+	"female-student-type-1-2_1f469-1f3fb-200d-1f393.png",
+	"male-teacher-type-1-2_1f468-1f3fb-200d-1f3eb.png",
+	"female-teacher-type-1-2_1f469-1f3fb-200d-1f3eb.png",
+	"male-judge-type-1-2_1f468-1f3fb-200d-2696-fe0f.png",
+	"female-judge-type-1-2_1f469-1f3fb-200d-2696-fe0f.png",
+	"male-farmer-type-1-2_1f468-1f3fb-200d-1f33e.png",
+	"female-farmer-type-1-2_1f469-1f3fb-200d-1f33e.png",
+	"male-cook-type-1-2_1f468-1f3fb-200d-1f373.png",
+	"female-cook-type-1-2_1f469-1f3fb-200d-1f373.png",
+	"male-mechanic-type-1-2_1f468-1f3fb-200d-1f527.png",
+	"female-mechanic-type-1-2_1f469-1f3fb-200d-1f527.png",
+	"male-factory-worker-type-1-2_1f468-1f3fb-200d-1f3ed.png",
+	"female-factory-worker-type-1-2_1f469-1f3fb-200d-1f3ed.png",
+	"male-office-worker-type-1-2_1f468-1f3fb-200d-1f4bc.png",
+	"female-office-worker-type-1-2_1f469-1f3fb-200d-1f4bc.png",
+	"male-scientist-type-1-2_1f468-1f3fb-200d-1f52c.png",
+	"female-scientist-type-1-2_1f469-1f3fb-200d-1f52c.png",
+	"male-technologist-type-1-2_1f468-1f3fb-200d-1f4bb.png"
+];
