@@ -489,7 +489,8 @@ div#toast {
 	position: absolute;
     width: 100%;
     text-align: center;
-    margin-top: -33px;
+	margin-top: -33px;
+	z-index: 4;
 }
 
 
@@ -550,7 +551,7 @@ div#toast {
     font-family: 'Open Sans', sans-serif;
     border-radius: 5px;
 	font-size: 14px;
-	font-weight: 600;
+	/*font-weight: 600;*/
     max-height: 50px;
     height: 50px;
     line-height: 25px;
@@ -588,6 +589,8 @@ div#toast {
     left: 8px;
 	opacity: .6;
 	z-index: 5;
+	width: 21px;
+    height: 21px;
 }
 
 .sndr-body .image-btn {
@@ -611,22 +614,23 @@ div#toast {
     position: absolute;
     bottom: 60px;
 	width: 100%;
-	max-height: 200px;
-	min-height: 200px;
+	max-height: 230px;
+	min-height: 230px;
 	box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, .1);
-	display: none;
+	z-index: 8;
 }
 
 #co-hdr {
 	padding: 5px;
 	position: relative;
 	z-index: 8;
-	box-shadow: 0px 0px 1px 0px rgba(0,0,0, .1);
+	box-shadow: 0px 1px 1px 0px rgba(0,0,0, .1);
 }
 
 #co-hdr-txt {
 	font-size: 14px;
-    font-weight: 600;
+	font-weight: 600;
+	text-transform: capitalize;
 }
 
 #co-cls-btn {
@@ -645,17 +649,21 @@ div#toast {
 }
 
 #co-body {
-	min-height: 142px;
-    max-height: 142px;
-	overflow-y: auto;
-	overflow-x: hidden;
-	padding-left: 7px;
-	user-select: none;
+	min-height: 173px;
+    max-height: 173px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-left: 7px;
+    user-select: none;
+	padding-top: 7px;
+	font-size: 14px;
+    color: gray;
 }
 
 .emo {
 	display: inline-block;
 	padding: 3px;
+	cursor: pointer;
 
 }
 
@@ -679,8 +687,9 @@ div.text-emo {
 #co-footer {
 	display: block;
 	text-align: center;
-	padding: 5px 0px;
+	padding: 0px 0px;
 	height: 20px;
+	box-shadow: 0px -2px 1px 0px rgba(0,0,0, .1);
 }
 
 
@@ -714,6 +723,51 @@ div.text-emo {
 
 .row .c3 {
 	float: left;
-	width: 33.3%;
+	width: 33%;
 	font-size: 13px;
+}
+
+
+
+.h {
+	display: none !important;
+}
+
+
+.co-body-img {
+	display: inline-block;
+	width: 144px;
+}
+
+.co-body-img img {
+	width: 100%;
+	height: 100px;
+}
+
+.cf-o {
+	cursor: pointer;
+	padding: 1px 0px 2px 0px;
+    border-bottom: 1px solid #f1f0f0;
+}
+
+.cf-o-sel {
+	font-weight: 600;
+    color: #E74C3C;
+}
+
+.b-l {
+	border-left: 1px solid #eae8e8;
+}
+
+.b-r {
+	border-right: 1px solid #eae8e8;
+}
+
+.msg-img {
+	height: 120px;
+}
+
+.msg-img img {
+	height: 100%;
+	width: 100%;
 }

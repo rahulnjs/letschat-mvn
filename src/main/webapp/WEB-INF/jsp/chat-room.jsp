@@ -18,7 +18,7 @@
 
 					<div id="chat-box"></div>
 					<div id="sender">
-						<div id="chat-options">
+						<div id="chat-options" class="h">
 							<div id="co-hdr">
 								<div id="co-hdr-txt">
 									Chat Options	
@@ -31,14 +31,14 @@
 							</div>
 							<div id="co-footer">
 								<div class="row">
-									<div class="c3">
-										emoji
+									<div class="c3 cf-o b-r cf-o-sel" id="emoji-tab-btn">
+										<i class="far fa-smile"></i> emoji
 									</div>
-									<div class="c3" id="sticker-tab-btn">
-										sticker
+									<div class="c3 cf-o" id="sticker-tab-btn">
+										<i class="fas fa-star"></i> sticker
 									</div>
-									<div class="c3" id="gif-tab-btn">
-										gif
+									<div class="c3 cf-o b-l" id="gif-tab-btn">
+										<i class="fas fa-chess-board"></i> gif
 									</div>
 								</div>
 							</div>

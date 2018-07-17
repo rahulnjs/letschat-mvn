@@ -76,6 +76,7 @@ $('#send-btn').click(postThisMessage);
 function postThisMessage() {
 	if ($('.text-area').html().length > 0) {
 		postMessage();
+		$CHAT_OPTS.addClass('h');
 	}
 }
 
@@ -781,6 +782,13 @@ var $CHAT_OPTS = $('#chat-options');
 const EMO_URL = 'https://emojipedia-us.s3.amazonaws.com/thumbs/72/whatsapp/116/';
 
 $('#emo-btn').on('click', function () {
+	addEmos();
+	$CHAT_OPTS.toggleClass('h');
+	selectThisTab($('#emoji-tab-btn'));
+});
+
+
+function addEmos() {
 	var $body = $('#co-body').html('');
 	emoList.forEach(function (e) {
 		$body.append(`
@@ -789,15 +797,122 @@ $('#emo-btn').on('click', function () {
 			</div>
 		`);
 	});
-	$CHAT_OPTS.show();
+}
+
+
+
+$('#emoji-tab-btn').on('click', function() {
+	addEmos();
+	selectThisTab($(this));
 });
+
+$('#gif-tab-btn').on('click', function() {
+	addGif();
+	selectThisTab($(this));
+});
+
+
+$('#sticker-tab-btn').on('click', function() {
+	addSticker();
+	selectThisTab($(this));
+});
+
+function selectThisTab(tab) {
+	var cls = 'cf-o-sel';
+	$('.cf-o').removeClass(cls);
+	tab.addClass(cls);
+	$('#co-hdr-txt').text(tab.text());
+}
+
+//
+
+var GES_DATA = {
+	gif: null,
+	sticker: null
+}
+
+
+function addGif() {
+	if(!GES_DATA.gif) {
+		var urls = [];
+		$('#co-body').html('working...');
+		$.get('https://api.giphy.com/v1/gifs/trending?' + 
+				'api_key=EBWLu12HNKXszbvnjYV0tUqVnapD2jrh&limit=25&rating=G', function(gifs) {
+			gifs.data.forEach(function(d) {
+				urls.push(d.images.fixed_width.url.replace(/media\d/, 'i'));
+			});
+			GES_DATA.gif = urls;
+			showImgInCoBody(GES_DATA.gif, 'gif');
+		});
+	} else {
+		showImgInCoBody(GES_DATA.gif, 'gif');
+	}
+	
+	
+	
+}
+
+function showImgInCoBody(arr, what) {
+	var $body = $('#co-body').html('');
+	arr.forEach(function (e) {
+		$body.append(`
+			<div class="co-body-img ${what}">
+				<img src="${e}">
+			</div>
+		`);
+	});
+}
+
+function addSticker() {
+	if(!GES_DATA.sticker) {
+		var urls = [];
+		$('#co-body').html('working...');
+		$.get('https://api.giphy.com/v1/stickers/trending?api_key=' + 
+					'EBWLu12HNKXszbvnjYV0tUqVnapD2jrh&limit=25&rating=G', function(gifs) {
+			gifs.data.forEach(function(d) {
+				urls.push(d.images.fixed_width.url.replace(/media\d/, 'i'));
+			});
+			GES_DATA.sticker = urls;
+			showImgInCoBody(GES_DATA.sticker, 'sticker');
+		});
+	} else {
+		showImgInCoBody(GES_DATA.sticker, 'sticker');
+	}
+	
+}
 
 
 $('#co-body').on('click', '.emo', function() {
 	var url = $(this).attr('data-emo');
 	$('.text-area').html($('.text-area').html() + 
-		`<div class="text-emo"><img src="${EMO_URL}${url}" class="emo-text"></div> &nbsp;`);
+		`&nbsp; <div class="text-emo">
+					<img src="${EMO_URL}${url}" class="emo-text">
+			    </div>&nbsp;`);
 });
+
+
+$('#co-body').on('click', '.gif', function() {
+	sendPhotoMsg(this);
+});
+
+$('#co-body').on('click', '.sticker', function() {
+	sendPhotoMsg(this);
+});
+
+function sendPhotoMsg(img) {
+	var data = {
+		msg: '<div class="msg-img">' + $(img).html() + 
+			 '</div><div>' + $('.text-area').html() + '</div>',
+		by: cuser(),
+		type: 'text',
+		at: cT
+	};
+	var xyz = 'm' + crn() + DELIM + JSON.stringify(data);
+	$('.text-area').html('');
+	sendWSMsg(xyz);
+	$CHAT_OPTS.toggleClass('h');
+
+}
 
 var charCounter = 0;
 var lastCharTyped;
@@ -839,7 +954,7 @@ function postStatusAsNotTyping() {
 
 
 $('#co-cls-btn').on('click', function () {
-	$CHAT_OPTS.hide();
+	$CHAT_OPTS.toggleClass('h');
 });
 
 var emojis = {
