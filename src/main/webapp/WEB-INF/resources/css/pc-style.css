@@ -78,33 +78,25 @@
 		font-family: 'Chewy', cursive;
 		height: 44px;
 		color: rgba(248, 205, 83, 1);;
-		font-size: xx-large; //
-		text-shadow: 1px 1px 1px gray;
+		font-size: xx-large;
 		letter-spacing: 1px;
 		border-radius: 4px;
 		transition: background-color .5s ease;
 		box-shadow: 0px 1px 1px 0px gray;
-		min-width: 250px;
 	}
 	
 	#cc {
-	//margin-top: 30px;
-	background-color:#fff;
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	box-shadow: inset 1px 1px 10px 0px #ccc;
-	overflow-y: auto;
-	/*max-height: 450px;
-	min-height: 450px;*/
-	width: 100%;
-	//float: left;
-	//display: none;
-	position: fixed;
-	 z-index: 10;
-	transition: background-color .6s ease;
-	
-}
+		background-color:#fff;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		box-shadow: inset 1px 1px 10px 0px #ccc;
+		overflow-y: auto;
+		width: 100%;
+		position: fixed;
+		z-index: 10;
+		transition: background-color .6s ease;
+	}
 	.butt:hover {
 		cursor: pointer;
 		background-color: rgba(248, 205, 83, 1);;
@@ -223,14 +215,13 @@
 		font-family: 'Chewy', cursive;
 		height: 44px;
 		color: rgba(248, 205, 83, 1);;
-		font-size: xx-large; //
-		text-shadow: 1px 1px 1px gray;
+		font-size: xx-large; 
 		letter-spacing: 1px;
 		border-radius: 4px;
 		transition: background-color .5s ease;
 		box-shadow: 0px 1px 1px 0px gray;
 		max-width: 418px;
-		'
+		
 	}
 	.butt:hover {
 		cursor: pointer;

@@ -479,7 +479,7 @@ $('#signup-btn').on('click', function () {
 				pass: u.pass
 			},
 			success: function (data) {
-				if (data != 'null') {
+				if (data == 'null') {
 					$butt.removeClass(DISABLED);
 					hideToast();
 					showError('Username is not available.');
@@ -604,12 +604,14 @@ $('#new-cr-from-btn').on('click', function () {
 
 $('#join-cr-form-btn').on('click', function () {
 	var $btn = $(this);
+	
 	var cr = toSlug($('#jcr-name').val());
 	var obj = {
 		user: cuser(),
 		status: '',
 		fname: fname()
 	};
+	if(cr.length == 0) {return;}
 	$btn.addClass(DISABLED);
 	$('#join-cr-err').text('');
 	$.ajax({
