@@ -18,6 +18,7 @@
 <script type="text/javascript">
 	var t = new Date();
 	$.getScript('/resources/js/script.js?' + t.getTime(), function() {
+		$('.loading-modal').remove();
 		var page = $('#pid').text();
 		if(page != 'crp') {
 			$('#user-butt').remove();

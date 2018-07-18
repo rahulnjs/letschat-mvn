@@ -771,3 +771,55 @@ div.text-emo {
 	height: 100%;
 	width: 100%;
 }
+
+
+.form {
+	padding: 5px 10px;
+}
+
+
+.form .frm-element {
+    margin: 5px 0px;
+}
+
+.c {
+	text-align: center;
+}
+
+.cht-img {
+	position: relative;
+	width: 100%;
+	margin-left: -3px;
+}
+
+.cht-img img {
+	width: 100%;
+}
+
+.cht-img .img-del-btn {
+	color: #C0392B;
+    position: absolute;
+    font-size: 17px;
+    right: 7px;
+    top: 5px;
+	text-shadow: 2px 1px 5px rgba(0,0,0, .3);
+	display: none;
+}
+
+.cht-img .ldr {
+	left: 48%;
+    position: absolute;
+    animation: spin 2s infinite linear;
+    top: 37%;
+    font-size: 34px;
+}
+
+@keyframes spin {
+	0% {
+	  transform: rotate(0deg);
+	}
+  
+	100% {
+	  transform: rotate(1turn);
+	}
+  }

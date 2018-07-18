@@ -6,6 +6,7 @@ var cT = '';
 var isTyping = false;
 var rC = true;
 
+
 var monthNames = [
 	"January", "February", "March",
 	"April", "May", "June", "July",
@@ -74,7 +75,9 @@ function doPostMsg(e) {
 $('#send-btn').click(postThisMessage);
 
 function postThisMessage() {
-	if ($('.text-area').html().length > 0) {
+	if($('.cht-img').length > 0) {
+		sendImages();
+	} else if ($('.text-area').html().length > 0) {
 		postMessage();
 		$CHAT_OPTS.addClass('h');
 	}
@@ -317,8 +320,10 @@ function crn() {
 const DELIM = '-_-_-_-';
 
 function postMessage() {
-	var msg = $('.text-area').html();
-	$('.text-area').html('');
+	sendMsg($('.text-area').html());
+}
+
+function sendMsg(msg) {
 	var data = {
 		msg: msg,
 		by: cuser(),
@@ -326,6 +331,7 @@ function postMessage() {
 		at: cT
 	};
 	var xyz = 'm' + crn() + DELIM + JSON.stringify(data);
+	$('.text-area').html('');
 	sendWSMsg(xyz);
 }
 
@@ -760,33 +766,86 @@ function addMe(creator) {
 }
 
 
-
-
-
-$('#upload-btn').on('click', function () {
-	var file = document.getElementById('img');
-	for (var i = 0; i < file.files.length; i++) {
-		var fd = new FormData();
-		fd.append('image', file.files[i]);
-		var imgur = new Imgur({
-			clientid: 'ccee0475bded108'
-		});
-		imgur.post('https://api.imgur.com/3/image', fd, function (res) {
-			if (res.success) {
-				console.dir(res.link);
-			}
-		});
-	}
-});
-
-
 var $CHAT_OPTS = $('#chat-options');
 const EMO_URL = 'https://emojipedia-us.s3.amazonaws.com/thumbs/72/whatsapp/116/';
 
 $('#emo-btn').on('click', function () {
 	addEmos();
-	$CHAT_OPTS.toggleClass('h');
+	showHideCO();
 	selectThisTab($('#emoji-tab-btn'));
+});
+
+function showHideCO() {
+	$CHAT_OPTS.toggleClass('h');
+	$('#co-footer').show();
+}
+
+$('#image-btn').on('click', function () {
+	$('#img').click();
+});
+
+
+$('#img').on('change', function() {
+	var files = document.getElementById('img').files;
+	if(files) {
+		var $body = $('#co-body').html('');
+		$CHAT_OPTS.removeClass('h');
+		$('#co-footer').hide();
+		for(var i = 0; i < files.length; i++) {
+			var rdr = new FileReader();
+			rdr.onload = (function(imgAt) {
+				return function(e) {
+					//console.log(e.target.result);
+					$body.append(`
+						<div class="cht-img">
+							<div class="img-del-btn" id="idel-${imgAt}">
+								<i class="fas fa-trash"></i>
+							</div>
+							<div class="ldr" id="ildr-${imgAt}"><i class="fas fa-spinner"></i></div>
+							<img src="${e.target.result}" id="i-${imgAt}" class="c-i-i">
+						</div>
+					`);
+
+					var fd = new FormData();
+					fd.append('image', files[imgAt]);
+					
+					(function(imgAt) {
+						IMGUR.post('https://api.imgur.com/3/image', fd, function (res) {
+							if (res.success) {
+								$('#i-' + imgAt).attr('src', res.data.link);
+								$('#ildr-' + imgAt).remove();
+								$('#idel-' + imgAt).show();
+							}
+						});
+					})(imgAt);
+					
+				};
+			})(i);
+			
+			rdr.readAsDataURL(files[i]);
+			
+		}
+		
+	}
+});
+
+function sendImages() {
+	$('.c-i-i').each(function(i, img) {
+		var msg = '<div class="msg-img"><img src="' + $(img).attr('src') + '">' + 
+					'</div><div>' + $('.text-area').html() + '</div>';
+		console.dir(msg);
+		sendMsg(msg);
+	});
+	showHideCO();
+	document.getElementById('img').value = ''
+}
+
+$('#co-body').on('click', '.img-del-btn', function() {
+	$(this).parent().remove();
+	if($('.cht-img').length == 0) {
+		showHideCO();
+		document.getElementById('img').value = ''
+	}
 });
 
 
@@ -801,6 +860,9 @@ function addEmos() {
 	});
 }
 
+var IMGUR = new Imgur({
+	clientid: 'ccee0475bded108'
+});
 
 
 $('#emoji-tab-btn').on('click', function() {
@@ -902,17 +964,10 @@ $('#co-body').on('click', '.sticker', function() {
 });
 
 function sendPhotoMsg(img) {
-	var data = {
-		msg: '<div class="msg-img">' + $(img).html() + 
-			 '</div><div>' + $('.text-area').html() + '</div>',
-		by: cuser(),
-		type: 'text',
-		at: cT
-	};
-	var xyz = 'm' + crn() + DELIM + JSON.stringify(data);
-	$('.text-area').html('');
-	sendWSMsg(xyz);
-	$CHAT_OPTS.toggleClass('h');
+	var msg = '<div class="msg-img">' + $(img).html() + 
+			 '</div><div>' + $('.text-area').html() + '</div>';
+	sendMsg(msg)
+	showHideCO();
 
 }
 
@@ -955,9 +1010,7 @@ function postStatusAsNotTyping() {
 
 
 
-$('#co-cls-btn').on('click', function () {
-	$CHAT_OPTS.toggleClass('h');
-});
+$('#co-cls-btn').on('click', showHideCO);
 
 var emojis = {
 	emo: [

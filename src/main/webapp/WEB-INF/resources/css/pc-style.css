@@ -46,18 +46,17 @@
 		color: #3c3c3c;
 	}
 	.ip-field {
-		border: none; //
-		border-bottom: 1px solid lightgray;
+		border: none; 
 		width: 100%;
 		font-size: xx-large;
 		font-family: 'Chewy', cursive;
-		color: rgba(248, 205, 83, 1); //
-		background-image: url('../image/ch-bg-3.jpg');
+		color: rgba(248, 205, 83, 1); 
 		background-color: rgba(60, 60, 60, .2);
 		border-radius: 5px;
 		letter-spacing: 2px;
 		text-shadow: 1px 1px 1px gray;
 		padding-left: 2px;
+		box-sizing: border-box;
 	}
 	table.frm-tab {
 		margin: 0px auto;
@@ -186,19 +185,18 @@
 		color: #3c3c3c;
 	}
 	.ip-field {
-		border: none; //
-		border-bottom: 1px solid lightgray;
+		border: none; 
 		width: 100%;
 		font-size: xx-large;
 		font-family: 'Chewy', cursive;
-		color: rgba(248, 205, 83, 1); //
-		background-image: url('../image/ch-bg-3.jpg');
+		color: rgba(248, 205, 83, 1); 
 		background-color: rgba(60, 60, 60, .2);
 		border-radius: 5px;
 		letter-spacing: 2px;
 		text-shadow: 1px 1px 1px gray;
 		padding-left: 2px;
 		max-width: 414px;
+		box-sizing: border-box;
 	}
 	table.frm-tab {
 		margin: 0px auto;

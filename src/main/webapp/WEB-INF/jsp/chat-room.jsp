@@ -57,6 +57,7 @@
 							<div class="image-btn" id="image-btn">
 								<i class="fas fa-image"></i>
 							</div>
+							<input type="file" name="image" id="img" style="display: none;" multiple accept="image/*">
 							<div class="send-btn" id="send-btn">
 								<i class="fas fa-location-arrow"></i>
 							</div>

@@ -10,46 +10,39 @@
 					<span id="upload-btn">upload</span>
 				</form>-->
 				<form onsubmit="return false;" id="login-form">
-					<table cellpadding="5" class="frm-tab">
-						<tr>
-							<td style="text-align: center; height: 30px;">
-								<span class="error" id="err-txt"></span>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span class="label">Username</span>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="text" name="un" class="ip-field" id="user" autocomplete="off">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span class="label">Password</span>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="password" name="pass" class="ip-field" id="cid" autocomplete="off">
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center;">
-								<br>
-								<button class="butt" id="login-btn" data-form="login-form">Login</button>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center;">
-								<br>
-								<a href="/signup" class="log-sin-btn">Sign Up</a>
-							</td>
-						</tr>
-					</table>
-					</form>
+					<div class="form">
+						<div class="frm-element" style="text-align: center; height: 30px;">
+							<span class="error" id="err-txt"></span>
+						</div>
+
+						<div class="frm-element">
+							<span class="label">Username</span>	
+						</div>
+
+						<div class="frm-element">
+							<input type="text" name="un" class="ip-field" id="user" autocomplete="off">
+						</div>
+
+						<div class="frm-element">
+							<span class="label">Password</span>	
+						</div>
+
+						<div class="frm-element">
+							<input type="password" name="pass" class="ip-field" id="cid" autocomplete="off">
+						</div>
+
+						<div class="frm-element">
+							<br>
+							<button class="butt" id="login-btn" data-form="login-form">Login</button>
+						</div>
+
+						<div class="frm-element c" style="margin-top: 17px;">
+							<br>
+							<a href="/signup" class="log-sin-btn">Sign Up</a>	
+						</div>
+
+					</div>
+				</form>
 			</div>
 		</div>
 		<%@include file="footer.jspf" %>
