@@ -19,6 +19,7 @@ public class ApplicationController {
 	
 	Worker worker = new Worker();
 	public static long TIME = new Date().getTime();
+	public static boolean PRODUCTION = true;
 
 	@RequestMapping("/")
 	public String index() {

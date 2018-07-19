@@ -8,6 +8,10 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.IndexOptions;
+
+
+import com.chat.controller.ws.ApplicationController;
 
 public class MongoDB {
 
@@ -16,18 +20,21 @@ public class MongoDB {
 
 	
 	private static void init() {
-		//System.out.println(database.getCollection(Worker.CHAT_USER).deleteMany(new BasicDBObject()).wasAcknowledged());
-		//database.getCollection(Worker.CHAT_USER).createIndex(new BasicDBObject("user", 1), new IndexOptions().unique(true));
-		//database.getCollection(Worker.CHAT).createIndex(new BasicDBObject("slug", 1), new IndexOptions().unique(true));
-		//database.getCollection(Worker.CHAT).createIndex(new BasicDBObject("creator", 1));
-		//database.getCollection(Worker.CHAT_MSG).createIndex(new BasicDBObject("time", 1));
-		//database.getCollection(Worker.CHAT_MSG).createIndex(new BasicDBObject("cr", 1));
+		database.getCollection(Worker.CHAT_USER).createIndex(new BasicDBObject("user", 1), new IndexOptions().unique(true));
+		database.getCollection(Worker.CHAT).createIndex(new BasicDBObject("slug", 1), new IndexOptions().unique(true));
+		database.getCollection(Worker.CHAT).createIndex(new BasicDBObject("creator", 1));
+		database.getCollection(Worker.CHAT_MSG).createIndex(new BasicDBObject("time", 1));
+		database.getCollection(Worker.CHAT_MSG).createIndex(new BasicDBObject("cr", 1));
 	}
 	
 	static {
-		try {
+		String url = ApplicationController.PRODUCTION ? 
+			"mongodb://admin:11_root@ds135547.mlab.com:35547/heroku_hspfz0qg" :
+			"mongodb+srv://chat_user:root@chat-cluster-pn5pu.mongodb.net/chat?retryWrites=true";
+
+		try { 
 			mongoClient = new MongoClient(
-					new MongoClientURI("mongodb+srv://chat_user:root@chat-cluster-pn5pu.mongodb.net/chat?retryWrites=true"));
+					new MongoClientURI(url));
 			database = mongoClient.getDatabase("chat");
 			init();
 		} catch (Exception e) {
