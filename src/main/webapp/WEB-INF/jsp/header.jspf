@@ -1,5 +1,5 @@
 <div id="header">
-	<div style="position: relative; line-height: 65px;">
+	<div style="position: relative; line-height: 50px;">
 		<div style="display: inline-block;">
 			<img src="/resources/image/Chat.png" width="32"
 					height="32">

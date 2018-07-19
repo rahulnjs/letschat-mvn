@@ -663,8 +663,10 @@ function fetchAllChatRooms() {
 		success: function (data) {
 			hideToast();
 			var json = $.parseJSON(data);
-			renderChats(json, '0');
-			renderChats(json, '1');
+			var total = renderChats(json, '0') + renderChats(json, '1')
+			if(total == 0) {
+				$('#no-cr-found').show();
+			}
 			$('.cr').on('click', function () {
 				window.location.assign('/chat/' + $(this).attr('data-slug'));
 			});
@@ -686,11 +688,13 @@ function renderChats(json, no) {
 		$('#cr-list-' + no + '-p').hide();
 	}
 
+	return json[no].length;
+
 	function renderChat(cr) {
 		cr.cd = toDate(cr._cd);
 		cr.mem = toMemStatus(cr.users);
 		var templ = `
-			<div class="cr" data-slug="${cr.slug}">
+			<div class="cr w3-col s12 m6 l4" data-slug="${cr.slug}">
 				<div class="title">
 					${cr.name}
 				</div>

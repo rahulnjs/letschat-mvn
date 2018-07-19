@@ -19,4 +19,6 @@
     href="/resources/css/pc-style.css?v=<%=ApplicationController.TIME%>">
 <link rel="stylesheet" 
     href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/resources/css/w3.css">
+<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
 </head>

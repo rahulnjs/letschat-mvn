@@ -43,6 +43,7 @@ public class MongoDB {
 	}
 	
 	public static void closeCon() {
+		
 		mongoClient.close();
 	}
 	
