@@ -791,11 +791,11 @@ $('#img').on('change', function() {
 		var $body = $('#co-body').html('');
 		$CHAT_OPTS.removeClass('h');
 		$('#co-footer').hide();
+		$('#co-hdr-txt').text('Share Image');
 		for(var i = 0; i < files.length; i++) {
 			var rdr = new FileReader();
 			rdr.onload = (function(imgAt) {
 				return function(e) {
-					//console.log(e.target.result);
 					$body.append(`
 						<div class="cht-img">
 							<div class="img-del-btn" id="idel-${imgAt}">
@@ -833,11 +833,11 @@ function sendImages() {
 	$('.c-i-i').each(function(i, img) {
 		var msg = '<div class="msg-img"><img src="' + $(img).attr('src') + '">' + 
 					'</div><div>' + $('.text-area').html() + '</div>';
-		console.dir(msg);
 		sendMsg(msg);
 	});
 	showHideCO();
-	document.getElementById('img').value = ''
+	document.getElementById('img').value = '';
+	$('.cht-img').remove();
 }
 
 $('#co-body').on('click', '.img-del-btn', function() {
