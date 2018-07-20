@@ -83,13 +83,32 @@ function postThisMessage() {
 	}
 }
 
-function checkForNewDate() {
-	if ((getDatePart(startDate) < getDatePart(cT)) || $('.msg-wrapper').length === 0) {
-		var parts = cT.split(" ")[0].split("-");
-		if(parts && parts.length == 3) {
-			var div = getMarkerForText(monthNames[parseInt(parts[1]) - 1] + ' ' + parts[2] + ', ' + parts[0]);
-			$('#chat-box').append(div);
+
+
+function checkForNewDate(cM) {
+	var fullCm = toStr(cM, DATE_OPTS.long);
+	var div = null;
+	if(lastMsgTime == 0) {
+		div = getDateMarker(fullCm);
+	} else {
+		if(parseInt(toStr(cM, DATE_OPTS.date)) !=
+			parseInt(toStr(lastMsgTime, DATE_OPTS.date))) {
+			div = getDateMarker(fullCm);
 		}
+	}
+
+	if(div) {
+		$('#chat-box').append(div);
+	}
+
+	function getDateMarker(fullCm) {
+		var parts = fullCm.split(',');
+		return getMarkerForText(parts[1] + ',' + parts[2]);
+	}
+
+	function toStr(dt, opt) {
+		return (new Date(parseInt(dt)))
+					.toLocaleDateString('en-US', opt);
 	}
 }
 
@@ -150,7 +169,6 @@ function updateStatus(jsonObj) {
 			}
 		} else {
 			$(me).before(getUserTemplate(jsonObj[i]));
-			checkForNewDate();
 			$('#chat-box').append(getMarkerForText(name + ' joined'));
 			scrollToChatBoxBottom();
 		}
@@ -225,7 +243,7 @@ function renderMsgs(msgs) {
 	var i = 0;
 	while (i <= msgs.length - 1) {
 		if ($('#msg-' + msgs[i].time.$numberLong).length == 0) {
-			checkForNewDate();
+			checkForNewDate(msgs[i].time.$numberLong);
 			$('#chat-box').append(getBubble(msgs[i]));
 			lastMsgTime = msgs[i].time.$numberLong;
 			scrollToChatBoxBottom();
@@ -244,23 +262,28 @@ function getBubble(msg) {
 	}
 }
 
-function formatAtProp(msg) {
-	var options = {
+const DATE_OPTS = {
+	long: {
 		weekday: 'short',
 		year: 'numeric',
 		month: 'short',
 		day: 'numeric',
 		hour: 'numeric',
 		minute: 'numeric'
-	};
-
-	var options2 = {
+	},
+	short: {
 		hour: 'numeric',
 		minute: 'numeric'
-	};
+	},
+	date: {
+		day: 'numeric'
+	}
+}
+
+function formatAtProp(msg) {
 	var d = new Date(parseInt(msg.time.$numberLong));
-	msg.fat = d.toLocaleDateString("en-US", options);
-	msg.at = d.toLocaleDateString("en-US", options2).split(', ')[1];
+	msg.fat = d.toLocaleDateString("en-US", DATE_OPTS.long);
+	msg.at = d.toLocaleDateString("en-US", DATE_OPTS.short).split(', ')[1];
 }
 
 function getIncomingBubble(msg) {
@@ -275,7 +298,7 @@ function getIText(msg) {
 		'<span class="msg-by">' + msg.by + '</span></div>' +
 		'<div class="main-msg">' + processMsg(msg) + '</div>' +
 		'<div class="time-bar incoming">' +
-		'<span class="time">' + msg.at + '</span>' +
+		'<span class="time" title="' + msg.fat + '">' + msg.at + '</span>' +
 		'</div></div></div>';
 }
 
@@ -342,30 +365,6 @@ function sendMsg(msg) {
 	var xyz = 'm' + crn() + DELIM + JSON.stringify(data);
 	$('.text-area').html('');
 	sendWSMsg(xyz);
-}
-
-
-function addNewBubble(msg) {
-	lastMsgTime = msg.time;
-	var msg2 = Object.assign({}, msg);
-	msg2.time = {
-		'$numberLong': msg2.time
-	};
-	formatAtProp(msg2);
-	var bubble = '<div class="msg-wrapper outgoing" id="msg-' + msg.time + '">' +
-		'<div class="msg out">' +
-		'<div class="main-msg">' + msg2.msg + '</div>' +
-		'<div class="time-bar outgoing">' +
-		'<span class="time"> ' + msg2.at + '&nbsp;&nbsp;<span id="bubble-' +
-		msg2.time.$numberLong + '" style="opacity: 0;" class="tick"><i class="fas fa-check"></i><span></span>' +
-		'</div></div></div>';
-	checkForNewDate();
-	$('#chat-box').append(bubble);
-	scrollToChatBoxBottom();
-}
-
-function startServices() {
-	//var msgFetcher = setInterval(getMsgs, 1000);
 }
 
 function getTime() {
