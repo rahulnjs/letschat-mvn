@@ -813,4 +813,5 @@ div.text-emo {
 
 .msg-link {
 	color: blue;
+	word-break: break-all;
 }

@@ -3,7 +3,7 @@
 	<div class="modal-err" id="new-cr-err"></div>
 	<section>
 		<div class="form w3-row" style="margin: 0px auto;
-    width: 400px;">
+    max-width: 400px;">
 			<div class="w3-col s12">
 				<div class="frm-element">
 					<span class="label">Chat Room Name</span>
@@ -30,7 +30,7 @@
 	<div class="modal-err" id="join-cr-err"></div>
 	<section>
 		<div class="form w3-row" style="margin: 0px auto;
-    width: 400px;">
+    max-width: 400px;">
 			<div class="w3-col s12">
 				<div class="frm-element">
 					<span class="label">Chat Room Name</span>

@@ -86,8 +86,10 @@ function postThisMessage() {
 function checkForNewDate() {
 	if ((getDatePart(startDate) < getDatePart(cT)) || $('.msg-wrapper').length === 0) {
 		var parts = cT.split(" ")[0].split("-");
-		var div = getMarkerForText(monthNames[parseInt(parts[1]) - 1] + ' ' + parts[2] + ', ' + parts[0]);
-		$('#chat-box').append(div);
+		if(parts && parts.length == 3) {
+			var div = getMarkerForText(monthNames[parseInt(parts[1]) - 1] + ' ' + parts[2] + ', ' + parts[0]);
+			$('#chat-box').append(div);
+		}
 	}
 }
 
@@ -301,7 +303,7 @@ function processMsg(msg) {
 			var m = matches[i];
 			if(!/(emojipedia-us.s3.amazonaws)|(i.imgur)|(i.giphy)/.test(m)) {
 				msg.msg = msg.msg.replace(link,
-					 `<a href="${m}" class="msg-link">${m}</a>`);
+					 `<a href="${m}" class="msg-link" target="_blank">${m}</a>`);
 			}
 		}
 		//msg.msg = msg.msg.replace(link, '<a href="$1" class="msg-link">$1</a>');
