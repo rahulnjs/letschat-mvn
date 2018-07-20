@@ -8,8 +8,7 @@
 			<div id="container">
 				<div id="msg-opts">
 				</div>
-				<div id="chat-box-header"
-					style="text-align: center; font-family: 'Chewy', cursive; min-height: 35px; padding: 3px 0px 1px 5px; font-size: x-large; font-weight: 600px; text-shadow: 1px 1px 1px gray; color: black; display: inline-grid;">
+				<div id="chat-box-header">
 					
 				</div>
 				<div id="mem-list" class="mem-list-class">
@@ -60,9 +59,6 @@
 							<input type="file" name="image" id="img" style="display: none;" multiple accept="image/*">
 							<div class="send-btn" id="send-btn">
 								<i class="fas fa-location-arrow"></i>
-							</div>
-							<div class="more-opt-btn">
-								<i class="fas fa-ellipsis-h"></i>
 							</div>
 						</div>
 						

@@ -1,16 +1,14 @@
 @media only screen and (max-width : 768px) {
 	#header {
 		height: 50px;
-		background-color: #3c3c3c; //
-		background-image: url('../image/header-bg.jpg');
-		color: rgba(248, 205, 83, 1); //
-		font-family: 'Acme', sans-serif;
+		background-color: #3c3c3c; 
+		color: rgba(248, 205, 83, 1); 
 		font-family: 'Chewy', cursive;
 		letter-spacing: 1px;
 		padding: 0px 0px 10px 5px;
 		font-size: 45px;
 		box-shadow: 0px 2px 1px 0px #363636;
-		//position: fixed;
+		position: fixed;
 		width: 100%;
 		text-shadow: 1px 1px 1px gray;
 	}
@@ -105,9 +103,7 @@
 		margin-top: 4%;
 		text-align: center;
 	}
-	div#container { //
-		transform: rotate(30deg); //
-		margin: 0px auto;
+	div#container {
 		width: 98%;
 	}
 	#mem-list {
@@ -138,10 +134,8 @@
 @media only screen and (min-width: 769px) and (max-width: 1600px) {
 	#header {
 		height: 50px;
-		background-color: #3c3c3c; //
-		background-image: url('../image/header-bg.jpg');
-		color: rgba(248, 205, 83, 1); //
-		font-family: 'Acme', sans-serif;
+		background-color: #3c3c3c; 
+		color: rgba(248, 205, 83, 1); 
 		font-family: 'Chewy', cursive;
 		letter-spacing: 1px;
 		padding: 0px 0px 10px 5px;

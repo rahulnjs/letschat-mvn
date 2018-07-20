@@ -223,7 +223,7 @@ function determineStatus(u) {
 			}
 		}
 	}
-	u.status = status;
+	u.status = status ? status : 'Presense unknown';
 }
 
 
@@ -235,6 +235,7 @@ function getMsgs() {
 	}).done(function (data) {
 		data = $.parseJSON(data);
 		renderMsgs(data.msg);
+		console.dir(data.status);
 		updateStatus(data.status);
 	});
 }
@@ -373,13 +374,14 @@ function getTime() {
 		method: 'get',
 		url: 'https://api.ipgeolocation.io/ipgeo?apiKey=9c19f884bafd4dd281381936964a6982',
 	}).done(function (msg) {
-		startServices();
 		cT = msg.time_zone.current_time.substr(0, 16);
 		if (stD == 0) {
 			startDate = cT;
 			stD++;
 			setInterval(clock, 60 * 1000);
 		}
+		getMsgs();
+		doConnectViaWS();
 
 	});
 }
@@ -747,9 +749,7 @@ function initChatRoom() {
 		var data = $.parseJSON(res);
 		$('#chat-box-header').text(data.name);
 		showUsers(data.users, data.creator);
-		getMsgs();
 		getTime();
-		doConnectViaWS();
 	});
 
 }
@@ -982,6 +982,13 @@ function sendPhotoMsg(img) {
 	showHideCO();
 
 }
+
+$('#chat-box').on('click', '.msg-img', function() {
+	var src = $(this).find('img').attr('src');
+	$('#img-viewer').html('<img class="" src="' + src + '">').show();
+	$modal.show();
+
+});
 
 var charCounter = 0;
 var lastCharTyped;

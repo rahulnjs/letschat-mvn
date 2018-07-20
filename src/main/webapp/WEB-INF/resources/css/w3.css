@@ -687,7 +687,7 @@ a {
 }
 
 .w3-col.s12 {
-    width: 99.99999%
+    width: 99%
 }
 
 @media (min-width:601px) {
@@ -1033,7 +1033,8 @@ a {
 .w3-row-padding>.w3-threequarter,
 .w3-row-padding>.w3-quarter,
 .w3-row-padding>.w3-col {
-    padding: 0 8px
+    padding: 0 8px;
+    margin: 0px 2px;
 }
 
 .w3-container,
