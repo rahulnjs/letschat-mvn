@@ -1,5 +1,6 @@
 package com.chat.controller.ws;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 
 import com.chat.component.Worker;
+import com.chat.data.service.MongoDB;
 
 
 @Controller
@@ -19,8 +21,14 @@ public class ApplicationController {
 	
 	Worker worker = new Worker();
 	public static long TIME = new Date().getTime();
-	public static boolean PRODUCTION = false;
+	public static boolean PRODUCTION = true;
 
+	@PostConstruct
+	public void init() {
+		MongoDB._();
+	}
+	
+	
 	@RequestMapping("/")
 	public String index() {
 		return "index";

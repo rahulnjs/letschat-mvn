@@ -414,6 +414,7 @@ div#toast {
 	font-size: 2rem;
 	text-align: center;
 	margin-bottom: 8px;
+	font-family: 'Open Sans';
 }
 
 .small-info {
@@ -808,4 +809,8 @@ div.text-emo {
 	font-size: 2.7rem;
 	font-weight: 600;
 	color: #616A6B;
+}
+
+.msg-link {
+	color: blue;
 }

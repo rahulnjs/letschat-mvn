@@ -294,10 +294,17 @@ function getOText(msg) {
 
 
 function processMsg(msg) {
-	var link = /https?:\/\/[a-z0-9:&=\/?-]+/ig;
+	var link = /(https?:\/\/[_%a-z0-9:&=\/?\.-]+)/ig;
 	if (msg.type == 'text' && link.test(msg.msg)) {
-		var matches = link.exec(msg.msg);
-		console.dir(matches);
+		var matches = msg.msg.match(link);
+		for(var i = 0; i < matches.length; i++) {
+			var m = matches[i];
+			if(!/(emojipedia-us.s3.amazonaws)|(i.imgur)|(i.giphy)/.test(m)) {
+				msg.msg = msg.msg.replace(link,
+					 `<a href="${m}" class="msg-link">${m}</a>`);
+			}
+		}
+		//msg.msg = msg.msg.replace(link, '<a href="$1" class="msg-link">$1</a>');
 	}
 	return msg.msg;
 }
