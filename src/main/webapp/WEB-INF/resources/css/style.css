@@ -8,7 +8,8 @@ body {
 	padding: 0px;
 	font-family: 'Open Sans', sans-serif;
 	color: #3c3c3c;
-	background-image: url('../image/bg-gif-1.gif');
+	/*background-image: url('../image/bg-gif-1.gif');*/
+	background-color: #E5E7E9;
 	overflow-x: hidden;
 }
 
@@ -494,6 +495,7 @@ div#toast {
 	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, .5);
 	color: #fff;
 	opacity: 0;
+	font-family: 'Open sans';
 }
 
 .modal-err {
@@ -506,12 +508,13 @@ div#toast {
 
 #chat-box {
 	overflow-y: auto;
-	background-image: url('/resources/image/chat-bg.jpg');
-	width: 100%;
-	height: 70%;
-	min-height: 370px;
-	max-height: 370px;
-	box-shadow: inset 0px 1px 10px 0px #ccc;
+	overflow-x: hidden;
+    background-image: url('https://i.imgur.com/daOABFo.png');
+    height: 70%;
+    min-height: 370px;
+    max-height: 370px;
+    box-shadow: inset 0px 1px 10px 0px #ccc;
+    background-position-y: -505px;
 }
 
 #sender {
@@ -545,6 +548,7 @@ div#toast {
 	margin-right: 34px;
 	padding: 3px 0px 3px 31px;
 	overflow-y: auto;
+	overflow-x: hidden;
 	position: relative;
 	z-index: 3;
 }
@@ -804,7 +808,7 @@ div.text-emo {
 
 .banner-txt {
 	font-family: 'Satisfy', cursive;
-	font-size: 2.7rem;
+	font-size: 2.5rem;
 	font-weight: 600;
 	color: #616A6B;
 }
@@ -836,4 +840,9 @@ div.text-emo {
 
 #img-viewer img {
 	max-width: 100%;
+}
+
+.d-all {
+	pointer-events: none !important;
+    opacity: .4 !important;
 }

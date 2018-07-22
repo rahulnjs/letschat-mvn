@@ -235,7 +235,6 @@ function getMsgs() {
 	}).done(function (data) {
 		data = $.parseJSON(data);
 		renderMsgs(data.msg);
-		console.dir(data.status);
 		updateStatus(data.status);
 	});
 }
@@ -380,6 +379,7 @@ function getTime() {
 			stD++;
 			setInterval(clock, 60 * 1000);
 		}
+		setToastText('Fetching messages...');
 		getMsgs();
 		doConnectViaWS();
 
@@ -745,6 +745,7 @@ function toDate(d) {
 
 
 function initChatRoom() {
+	toast('Getting chat room ready...');
 	$.get(window.location.pathname + '/init', function (res) {
 		var data = $.parseJSON(res);
 		$('#chat-box-header').text(data.name);
@@ -785,6 +786,7 @@ $('#emo-btn').on('click', function () {
 	addEmos();
 	showHideCO();
 	selectThisTab($('#emoji-tab-btn'));
+	document.getElementById('img').value = '';
 });
 
 function showHideCO() {
@@ -800,10 +802,12 @@ $('#image-btn').on('click', function () {
 $('#img').on('change', function() {
 	var files = document.getElementById('img').files;
 	if(files) {
+		disableSendingOptions();
 		var $body = $('#co-body').html('');
 		$CHAT_OPTS.removeClass('h');
 		$('#co-footer').hide();
 		$('#co-hdr-txt').text('Share Image');
+		var count = 0;
 		for(var i = 0; i < files.length; i++) {
 			var rdr = new FileReader();
 			rdr.onload = (function(imgAt) {
@@ -827,6 +831,10 @@ $('#img').on('change', function() {
 								$('#i-' + imgAt).attr('src', res.data.link);
 								$('#ildr-' + imgAt).remove();
 								$('#idel-' + imgAt).show();
+								count++;
+								if(count == files.length) {
+									enableSendingOptions();
+								}
 							}
 						});
 					})(imgAt);
@@ -1050,6 +1058,17 @@ var emojis = {
 // https://api.giphy.com/v1/stickers/trending?api_key=EBWLu12HNKXszbvnjYV0tUqVnapD2jrh&limit=25&rating=G
 
 
+const $SENDER = $('#sender-body');
+
+
+function disableSendingOptions() {
+	$SENDER.addClass('d-all');
+}
+
+
+function enableSendingOptions() {
+	$SENDER.removeClass('d-all');
+}
 /********
  * Web Socket Code
  * 
@@ -1079,6 +1098,11 @@ function doConnectViaWS() {
 			case 's':
 				updateStatus($.parseJSON(data));
 				break;
+			case 'i':
+				//initialized!
+				enableSendingOptions();
+				hideToast();
+				break;
 		}
 	};
 
@@ -1095,9 +1119,7 @@ function doConnectViaWS() {
 function sendWSMsg(msg) {
 	try {
 		ws.send(msg);
-	} catch (error) {
-		alert(error);
-	}
+	} catch (error) {}
 }
 
 

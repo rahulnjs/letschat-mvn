@@ -48,7 +48,7 @@
 								<span id="type-stat"></span>
 							</div>
 						</div>
-						<div class="sndr-body">
+						<div class="sndr-body d-all" id="sender-body">
 							<div class="emo-btn" id="emo-btn">
 								<i class="far fa-smile"></i>
 							</div>

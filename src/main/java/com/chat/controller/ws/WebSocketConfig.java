@@ -71,6 +71,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 						list.add(session); 
 						suMap.put(session.getId(), parts[1]);
 						userChatRoom.put(session.getId(), parts[0]);
+						session.sendMessage(new TextMessage("i"));
 						break;
 				case 'm':
 						parts = msg.split(DELIM);

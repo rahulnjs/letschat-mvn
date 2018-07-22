@@ -16,6 +16,7 @@
 		margin: 0px auto;
 		width: 99%;
 		overflow-x : hidden;
+		padding-top: 50px;
 	}
 	#content {
 		padding: 22px 2px;
@@ -75,7 +76,7 @@
 		font-family: 'Chewy', cursive;
 		height: 44px;
 		color: rgba(248, 205, 83, 1);;
-		font-size: xx-large;
+		font-size: 1.8rem;
 		letter-spacing: 1px;
 		border-radius: 4px;
 		transition: background-color .5s ease;
@@ -148,6 +149,7 @@
 	#wrapper {
 		margin: 0px auto;
 		width: 90%;
+		overflow-x: hidden;
 	}
 	#content {
 		padding-top: 50px;
