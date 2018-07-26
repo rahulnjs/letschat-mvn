@@ -515,6 +515,7 @@ $('#signup-btn').on('click', function () {
 	function valid(json) {
 		var v = true;
 		var msg;
+
 		Object.keys(json).forEach(function (key) {
 			if (json[key].trim().length == 0) {
 				msg = 'Fields can\'t be empty!';
@@ -527,6 +528,11 @@ $('#signup-btn').on('click', function () {
 			msg = 'Passwords do not match!';
 		}
 
+		if(!/^[a-z0-9_]+$/i.test(u.username)) {
+			v = false;
+			msg = 'Username is not valid, use letters, numbers and _ only.'; 
+		}
+ 
 		if (!v) {
 			showError(msg);
 		}
