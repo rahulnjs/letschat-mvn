@@ -38,6 +38,11 @@ public class ApplicationController {
 	@RequestMapping("/login")
 	@ResponseBody
 	public String login(@RequestParam String un, @RequestParam String pass, HttpServletRequest req) {
+		HttpSession ss = req.getSession(false);
+		if(ss != null) {
+			ss.removeAttribute("user");
+			ss.invalidate();
+		}
 		String name = worker.login(un, pass);
 		if(true) {
 			HttpSession s = req.getSession(true);
@@ -55,7 +60,7 @@ public class ApplicationController {
 	@RequestMapping("/user/{user}")
 	public String dashboard(@PathVariable String user, HttpServletRequest req) {
 		HttpSession s = req.getSession(false);
-		if(s == null || !s.getAttribute("user").equals(user)) {
+		if(user.length() == 0 || s == null || !user.equals(s.getAttribute("user"))) {
 			return "redirect:/";
 		} else {
 			return "dashboard";
