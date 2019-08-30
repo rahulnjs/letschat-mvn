@@ -214,6 +214,7 @@ textarea:focus {
 	font-size: 13px;
 	font-weight: 600;
 	position: relative;
+	word-break: break-all;
 }
 
 .day {

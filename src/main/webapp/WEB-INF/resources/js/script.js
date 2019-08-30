@@ -38,40 +38,6 @@ function showTypeS(msg) {
 	}
 }
 
-
-function log(msg) {
-	/*
-	$console.append('<div class="log-info">' + msg + '</div>');
-	scrollToBootomOfLog();
-	*/
-	function scrollToBootomOfLog() {
-		var height = 0;
-		$('#console .log-info').each(function (i, value) {
-			height += parseInt($(this).height());
-		});
-		height += '';
-		$('#console').css({
-			scrollTop: height
-		});
-	}
-}
-
-function hasSpace() {
-	var expr = /\s/;
-	return expr.test($('#user').val())
-}
-
-function notTyping() {
-	isTyping = false;
-}
-
-function doPostMsg(e) {
-	isTyping = $('#text-ip').val().length > 0;
-	if (e.which === 13) {
-		postThisMessage();
-	}
-}
-
 $('#send-btn').click(postThisMessage);
 
 function postThisMessage() {
@@ -319,14 +285,15 @@ function getOText(msg) {
 
 
 function processMsg(msg) {
-	var link = /(https?:\/\/[_%a-z0-9:&=\/?\.-]+)/ig;
+	//console.log(msg.msg);
+	var link = /(?<!href="|>)https?:\/\/[a-z0-9-]+\.[a-z0-9+#&/\.?=%-]+/ig;
 	if (msg.type == 'text' && link.test(msg.msg)) {
 		var matches = msg.msg.match(link);
 		for(var i = 0; i < matches.length; i++) {
 			var m = matches[i];
 			if(!/(emojipedia-us.s3.amazonaws)|(i.imgur)|(i.giphy)/.test(m)) {
 				msg.msg = msg.msg.replace(link,
-					 `<a href="${m}" class="msg-link" target="_blank">${m}</a>`);
+					 `&nbsp;<a href="${m}" class="msg-link" target="_blank">${m}</a>&nbsp;`);
 			}
 		}
 		//msg.msg = msg.msg.replace(link, '<a href="$1" class="msg-link">$1</a>');
@@ -352,7 +319,9 @@ function crn() {
 const DELIM = '-_-_-_-';
 
 function postMessage() {
-	sendMsg($('.text-area').html());
+	if(!/^\s+$/.test($('.text-area').html().trim().length)) {
+		sendMsg($('.text-area').html());
+	}
 }
 
 function sendMsg(msg) {
@@ -368,7 +337,6 @@ function sendMsg(msg) {
 }
 
 function getTime() {
-	//https://ipapi.co/json/
 	$.ajax({
 		method: 'get',
 		url: 'https://api.ipgeolocation.io/ipgeo?apiKey=9c19f884bafd4dd281381936964a6982',
